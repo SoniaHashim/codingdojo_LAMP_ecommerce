@@ -1,0 +1,53 @@
+.container {
+	width: 85%;
+	margin: 0 auto;
+}
+
+div.navigation {
+	padding: .8rem;
+	min-height: 1.6rem;
+	background-color: #444;
+	color: #fff;
+	margin-bottom: 1.6rem;
+}
+
+.navigation a {
+	text-decoration: underline;
+	text-align: right;
+}
+
+table {
+	width: 60%;
+	border: solid 1px silver;
+}
+
+ul.product-opt {
+	text-align: right;
+}
+
+ul.product-opt li {
+	display: inline;
+	margin: 0 1.6rem;
+}
+
+	a.false {
+	color: #000;
+		cursor: default;
+	}
+
+	a.false:hover, a.false:focus {
+		color: #000;
+		cursor: default;
+		background-color: inherit;
+	}
+
+form label {
+	display: block;
+	width: 10rem;
+	margin: .8rem 0; 
+	font-size: 1.4rem;
+}
+
+form label input {
+	text-align: right;
+}

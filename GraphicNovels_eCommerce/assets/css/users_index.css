@@ -1,0 +1,93 @@
+.container {
+	width: 85%;
+	margin: 0 auto;
+}
+
+img {
+	width: 125px;
+	height: 125px;
+	background-color: pink;
+}
+
+div.navigation {
+	padding: .8rem;
+	min-height: 1.6rem;
+	background-color: #444;
+	color: #fff;
+	margin-bottom: 1.6rem;
+}
+
+.navigation a {
+	text-decoration: underline;
+	text-align: right;
+}
+
+div.main {
+	border: solid 2px #000;
+}
+
+div.usertools {
+	padding: 1.6rem;
+}
+
+.usertools ul{
+	font-size: 1.6rem;
+	list-style-type: none;
+	padding-left: 1.6rem;
+}
+
+div.main-content {
+	padding-left: 1.6rem;
+}
+
+ul.pagination > li {
+	display: inline;
+}
+
+.pagination a.false {
+	color: #000;
+	cursor: default;
+}
+
+.pagination a.false:hover, a.false:focus {
+	color: #000;
+	cursor: default;
+	background-color: inherit;
+}
+
+div.content {
+	margin-left: 1.6rem;
+}
+
+ul.products {
+	text-align: center;
+}
+
+.content ul.products li {
+	display: inline-block;
+	vertical-align: top;
+	margin: .2rem;
+	padding: .8rem;
+}
+
+div.product{
+	border: solid 1px black;
+}
+
+.product p.price {
+	text-align: right;
+	vertical-align: middle;
+	background-color: #fff;
+	opacity: 0.6;
+	padding: .2rem;
+	line-height: 1.6rem;
+	margin: -2rem 0 0 0;
+}
+
+.products p.product-name {
+	margin: .8rem 0; 
+}
+
+ul.footer{
+	margin-left: 25%;
+}
