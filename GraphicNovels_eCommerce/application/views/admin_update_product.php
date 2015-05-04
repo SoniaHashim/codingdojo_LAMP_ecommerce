@@ -44,6 +44,11 @@
 			color: black;
 		}
 	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		})
+	</script>
 </head>
 <body>
 	<h2>Add/Edit Product - ID 3</h2>
@@ -75,7 +80,8 @@
 			</p>
 			<p>
 				<label for="images">Images:</label>
-				<input id="upload" type="file" name="images" multiple>
+				<input id="img-upload" type="file" name="images" multiple>
+				<div id="img-preview"></div>
 			</p>
 			<button class="btn btn-deault"><a href="#">Back</a></button>
 			<button class="btn btn-primary"><a href="#">Preview</a></button>
