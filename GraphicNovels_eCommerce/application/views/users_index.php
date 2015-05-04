@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class='container'>
-		<div class='row navigation main'>
+		<div class='row navigation'>
 			<h3 class='col-md-10'>Dojo eCommerce</h3>
 			<a class='col-md-2'>Shopping Cart (#)</a>
 		<!-- END OF NAVIGATION -->

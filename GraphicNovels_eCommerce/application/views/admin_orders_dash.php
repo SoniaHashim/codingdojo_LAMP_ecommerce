@@ -54,7 +54,7 @@
 				<input type="text" name="search" placeholder="search">
 				<input type="submit" value="submit search">
 			</form>
-			<form class="select inline" action="#" method="post">
+			<form class="select inline" name='order_status' action="#" method="post">
 				<select>
 					<option value="show_all">Show All</option>
 					<option value="order_in">Order in</option>

@@ -51,6 +51,7 @@
 		<div class='col-md-12'>
 			<h2>Shipping Information</h2>
 				<form action='order/create' method='post'>
+					<input type='hidden' name='cart_id' value='1'>
 					<label>First Name: <input type='text' name='first_name'></label>
 					<label>Last Name: <input type='text' name='last_name'></label>
 					<label>Address: <input type='text' name='address'></label>
@@ -60,12 +61,12 @@
 					<label>Zipcode: <input type='text' name='zip'></label>
 			<h2>Billing Information</h2>
 				<label class='shipping'><input type='checkbox' name='same'> Use shipping </label>
-				<label>First Name: <input type='text' name='first_name'></label>
-				<label>Last Name: <input type='text' name='last_name'></label>
-				<label>Address: <input type='text' name='address'></label>
-				<label>Address 2: <input type='text' name='address2'></label>
-				<label>City: <input type='text' name='city'></label>
-				<label>State: <input type='text' name='state'></label>
+				<label>First Name: <input type='text' name='bill_first_name'></label>
+				<label>Last Name: <input type='text' name='bill_last_name'></label>
+				<label>Address: <input type='text' name='bill_address'></label>
+				<label>Address 2: <input type='text' name='bill_address2'></label>
+				<label>City: <input type='text' name='bill_city'></label>
+				<label>State: <input type='text' name='bill_state'></label>
 				<label>Zipcode: <input type='text' name='zip'></label>
 				<label>Card: <input type='text' name='card'></label>
 				<label>Security Code: <input type='text' name='securitycode'></label>
