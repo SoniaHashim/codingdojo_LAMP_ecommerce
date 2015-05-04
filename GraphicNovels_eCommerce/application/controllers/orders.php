@@ -10,12 +10,31 @@ class Orders extends CI_Controller {
 
 	public function create() {
 		// calculate total for appropriate cart, acquire products in cart, destroy cart
-		$total = $this->load->model('Cart'); 
+		$this->load->model('Cart'); 
 		$total = $this->Cart->get_total_by_id($this->input->post('cart_id'));
 		$products = $this->Cart->get_products_by_id($this->input->post('cart_id'));
 		$this->Cart->destroy_by_id($this->input->post('cart_id'));
 
 		// charge appropriate card using STRIPE API
+		\Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+
+		$token = \Stripe\Token::create(array(
+		  "card" => array(
+		    "number" => $this->input->post('card'),
+		    "exp_month" => $this->input->post('month'),
+		    "exp_year" => $this->input->post('year'),
+		    "cvc" => $this->input->post('security')
+		  )
+		));
+
+		$ch = \Stripe\Charge::create(array(
+		  "amount" => $total, 
+		  "currency" => "usd",
+		  "source" => $token['id'], 
+		  "description" => "Charge for order id = ".$this->input->post('id')
+		));
+
+		$ch->capture();
 
 		// store addresses 
 		$billing_address = array(
