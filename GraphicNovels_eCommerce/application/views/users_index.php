@@ -109,7 +109,10 @@
 				console.log('clicked a page link - next');
 
 				var current_page = $('#page_number').val();
-				if (!current_page || current_page == '10') current_page = '0'; 
+
+				var last_page =  $('#last_page').attr('href'); 
+				console.log("last: " + last_page);
+				if (!current_page || current_page == last_page) current_page = '-1'; 
 				current_page++;
 
 				$('#page_number').val(current_page);
