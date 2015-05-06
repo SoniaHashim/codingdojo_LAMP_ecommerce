@@ -49,7 +49,7 @@ class Cart extends CI_Model {
 	function get_total_by_id($id) {
 		$products = $this->db->query("SELECT * FROM carts_has_products WHERE cart_id = ?", array($id))->record_array();
 		$sum = 0; 
-		for ($i=0; $i < count($products), $i++) {
+		for ($i=0; $i < count($products); $i++) {
 			$product_info = $products[$i];
 			$product = $this->db->query("SELECT * FROM products WHERE id = ?", array($product_info['product_id']))->row_array();
 			$price = $product['price'];

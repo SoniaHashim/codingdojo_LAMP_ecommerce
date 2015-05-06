@@ -2,14 +2,14 @@
 <head>
 	<title>Products Dashboard</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-theme.min.css">
-	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
 	<style type="text/css">		
 		.inline {
 			display: inline-block;
 			vertical-align: top;
-			margin-right: 10rem;
+			margin-right: 2rem;
 		}
 		.pages {
 			width: 365px;
@@ -53,6 +53,9 @@
 			}
 
 	</style>
+	<script type="text/javascript">
+
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -60,26 +63,32 @@
 			<h3>Dashboard</h3>
 			<!-- clicking "Orders" or "Products" will send a get request to display partials -->
 			<ul class="nav nav-pills nav-justified">
-				<li><a href="#">Orders</a></li>
+				<li><a href="/orders/show_all">Orders</a></li>
 				<li><a href="#">Products</a></li>
 				<li><a class="logoff" href="#">Log Off</a></li>
 			</ul>
 		</nav>
 		<div class="receipt">
 			<div class="inline customer_details">
-				<h5>Order ID: 1</h5>
-				<h5>Customer shipping info:</h5>
-				<p>Name: Bob</p>
-				<p>Address: 123 Dojo Way</p>
-				<p>City: Seattle</p>
-				<p>State: WA</p>
-				<p>Zip: 98133</p>
+				<?php
+				foreach ($record as $info) {
+				?>
+				<h5>Order ID: <?= $info['id'] ?></h5>
 				<h5>Customer Billing info:</h5>
-				<p>Name: Bob</p>
-				<p>Address: 123 Dojo Way</p>
-				<p>City: Seattle</p>
-				<p>State: WA</p>
-				<p>Zip: 98133</p>
+				<p>Name: <?= $info['first_name'] ?></p>
+				<p>Address: <?= $info['address'] ?></p>
+				<p>City: <?= $info['city'] ?></p>
+				<p>State: <?= $info['state'] ?></p>
+				<p>Zip: <?= $info['zip'] ?></p>
+				<h5>Customer Shipping info:</h5>
+				<p>Name: <?= $info['ship_to_name'] ?></p>
+				<p>Address: <?= $info['ship_to_address'] ?></p>
+				<p>City: <?= $info['ship_to_city'] ?></p>
+				<p>State: <?= $info['ship_to_state'] ?></p>
+				<p>Zip: <?= $info['ship_to_zip'] ?></p>
+				<?php
+				}
+				?>
 			</div>
 			<div class="inline order_receipt">
 				<table class="table table-bordered table-striped">
@@ -88,36 +97,34 @@
 						<th>Item</th>
 						<th>Price</th>
 						<th>Quantity</th>
-						<th>Total</th>
+						<th>Item Total</th>
 					</tr>
+					<?php 
+						foreach ($products as $details) {					
+					?>
 					<tr>
-						<td>1</td>
-						<td>Women's T-Shirt</td>
-						<td>19.99</td>
-						<td>1</td>
-						<td>19.99</td>
+						<td><?= $details['p_id'] ?></td>
+						<td><?= $details['item_name'] ?></td>
+						<td><?= $details['item_price'] ?></td>
+						<td><?= $details['item_quantity'] ?></td>
+						<td><?= number_format($details['item_total'],2,'.',',') ?></td>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>Men's T-Shirt</td>
-						<td>19.99</td>
-						<td>1</td>
-						<td>39.98</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Shorts</td>
-						<td>14.99</td>
-						<td>1</td>
-						<td>14.99</td>
-					</tr>
+					<?php
+						}	
+					 ?>
 				</table>
-				<h5 class="inline status">Status: Shipped</h5>
+				<?php 
+					// $products {
+				?>
+				<h5 class="inline status">Status: <?= $products[0]['status'] ?></h5>
 				<div class="inline totals">
-					<p>Sub total: $29.98</p>
-					<p>Shipping: $1.00</p>
-					<p>Total: $30.98</p>
+					<p>Sub total: <?= $products[0]['subtotal'] ?></p>
+					<p>Shipping: <?= $products[0]['shipping_fee'] ?></p>
+					<p>Total: <?= $products[0]['total'] ?></p>
 				</div>
+				<?php  
+					// }
+				?>
 			</div>
 		</div>
 		

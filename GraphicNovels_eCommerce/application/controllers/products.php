@@ -78,7 +78,7 @@ class Products extends CI_Controller {
 	public function upload_image() {
 		// use form_open_multipart('products/upload_image') in php on view
 		// config form such that name of input with upload file path = image
-		$image_path = 'image'
+		$image_path = 'image';
 		// add image to database 
 		$config['upload_path'] = './assets/products/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -113,7 +113,7 @@ class Products extends CI_Controller {
 
 		$subset_details = array(
 			'search' => $search,
-			'category' => $category 
+			'category' => $category, 
 			'page' => $page
 			);
 
@@ -132,7 +132,7 @@ class Products extends CI_Controller {
 		if (empty($page)) $page = 0; 
 
 		$subset_details = array(
-			'num' => $search_terms;
+			'num' => $search_terms,
 			'search' => $search,
 			'page' => $page
 		);
@@ -160,6 +160,6 @@ class Products extends CI_Controller {
 
 		$this->load->view('users_index');
 	}
-}$
+}
 
 //end of main controller

@@ -5,7 +5,6 @@ class Orders extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->output->enable_profiler();
 	}
 
 	public function create() {
@@ -62,12 +61,12 @@ class Orders extends CI_Controller {
 		$ship_id = $this->Order->create_address($shipping_address); 
 
 		// create order - returns boolean true if successful, false otherwise 
-		$order = {
+		$order = array(
 			'bill_id' => $bill_id,
 			'ship_id' => $ship_id,
 			'status' => 'Order in Process',
 			'total' => $total
-		}
+			);
 
 		$this->Order->create($order, $products); 
 	}
@@ -76,7 +75,8 @@ class Orders extends CI_Controller {
 		$this->load->model('Order'); 
 		$record = $this->Order->get_order_by_id($this->input->post('id'));
 		$products = $this->Order->get_products_by_order_id($this->input->post('id'));
-		// should return a partial showing order information 
+		// should return a partial showing order information
+		$this->load->view('admin_show_order', array('record' => $record, 'products' => $products));
 	}
 
 	public function filter() {		
@@ -101,17 +101,20 @@ class Orders extends CI_Controller {
 	}
 
 	public function update() {
+		var_dump($this->input->post());
+		die();
 		$this->load->model('Order'); 
 		$this->Order->change_status_by_id($this->input->post('id'), $this->input->post('status')); 
-
-		$record = $this->Order->get_order_by_id($this->input->post('id'));
+		// echo "yay";
+		// $this->show_all();
 		// Should return partial with updated status
 
 	}
 
 	public function show_all() {
 		$this->load->model('Order');
-		$records = $this->Order->get_all(); 
+		$records['rows'] = $this->Order->get_all();
+		$this->load->view('admin_orders_dash', $records);
 		// should return a partial containing all order data 
 	}
 }
