@@ -62,7 +62,7 @@ CREATE TABLE `admins` (
   `password` varchar(45) DEFAULT NULL,
   `salt` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `admins` (
 
 LOCK TABLES `admins` WRITE;
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` VALUES (1,'soniashashim@gmail.com','1679091c5a880faf6fb5e6087eb1b2dc','06B8'),(2,'fortis201@gmail.com','cfcd208495d565ef66e7dff9f98764da','YHH8');
+INSERT INTO `admins` VALUES (1,'soniashashim@gmail.com','ad029de9c34846b458d902abd31e1cc8','06B8'),(2,'fortis201@gmail.com','2de51804b1ee919f7800c91edaa6d20b','YHH8'),(3,'jae@admin.com','ad029de9c34846b458d902abd31e1cc8','06B8'),(4,'jerome@admin.com','ad029de9c34846b458d902abd31e1cc8','06B8');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `carts` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +96,7 @@ CREATE TABLE `carts` (
 
 LOCK TABLES `carts` WRITE;
 /*!40000 ALTER TABLE `carts` DISABLE KEYS */;
+INSERT INTO `carts` VALUES (1,'2015-05-05 12:39:04','2015-05-05 12:39:04'),(2,'2015-05-05 12:39:04','2015-05-05 12:39:04'),(3,'2015-05-05 12:39:05','2015-05-05 12:39:05'),(4,'2015-05-05 12:41:10','2015-05-05 12:41:10'),(5,'2015-05-05 12:41:10','2015-05-05 12:41:10'),(6,'2015-05-05 12:41:11','2015-05-05 12:41:11'),(7,'2015-05-05 13:10:32','2015-05-05 13:10:32'),(8,'2015-05-05 13:10:32','2015-05-05 13:10:32'),(9,'2015-05-05 13:10:33','2015-05-05 13:10:33');
 /*!40000 ALTER TABLE `carts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +162,7 @@ DROP TABLE IF EXISTS `images`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `images` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `file_path` varchar(45) DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
@@ -173,7 +174,7 @@ CREATE TABLE `images` (
 
 LOCK TABLES `images` WRITE;
 /*!40000 ALTER TABLE `images` DISABLE KEYS */;
-INSERT INTO `images` VALUES (1,'/assets/products/AbsoluteVisionVol1.jpg',15),(2,'/assets/products/AbsoluteVisionVol1.jpg',16),(3,'/assets/products/AgentOfTheEmpireVol1.jpg',22),(4,'/assets/products/AgentOfTheEmpireVol2.jpg',23),(5,'/assets/products/AgeOfApocalypseVol1.jpg',18),(6,'/assets/products/AgeOfApocalypseVol2.jpg',19),(7,'/assets/products/AgeOfUltron.jpg',17),(8,'/assets/products/ALongTimeAgoVol2.jpg',24),(9,'/assets/products/AbsoluteBlackestNight.jpg',12),(10,'/assets/products/AbsoluteGreenLanternRebirth.',13),(11,'/assets/products/AssignmentEarth.jpg',20),(12,'/assets/products/Batman-CourtOfOwls.jpg',10),(13,'/assets/products/BatmanAndRobinTheBoyWonder.j',11),(14,'/assets/products/BlackestNightTheCorps.jpg',14),(15,'/assets/products/CloudBack.jpg',2),(16,'/assets/products/CloudMain.jpg',2),(17,'/assets/products/CloudOmnislash.jpg',2),(18,'/assets/products/CloudStance.jpg',2),(19,'/assets/products/DarthVaderGrip.jpg',8),(20,'/assets/products/DarthVaderMain.jpg',8),(21,'/assets/products/DarthVaderSide.jpg',8),(22,'/assets/products/DarthVaderSlash.jpg',8),(23,'/assets/products/DS9FoolsGold.jpg',21),(24,'/assets/products/HarleyVairantBack.jpg',1),(25,'/assets/products/HarleyVairantMain.jpg',1),(26,'/assets/products/HarleyVairantStance.jpg',1),(27,'/assets/products/HarleyVairantWalk.jpg',1),(28,'/assets/products/IronManBack.jpg',6),(29,'/assets/products/IronManMain.jpg',6),(30,'/assets/products/IronManShot.jpg',6),(31,'/assets/products/IronManStance.jpg',6),(32,'/assets/products/LaraGeared.jpg',9),(33,'/assets/products/LaraMain.jpg',9),(34,'/assets/products/LaraSide.jpg',9),(35,'/assets/products/LaraStance.jpg',9),(36,'/assets/products/LightningBack.jpg',4),(37,'/assets/products/LightningMain.jpg',4),(38,'/assets/products/LightningStance.jpg',4),(39,'/assets/products/LightningStance2.jpg',4),(40,'/assets/products/LinkBack.jpg',5),(41,'/assets/products/LinkMain.jpg',5),(42,'/assets/products/LinkPreview.jpg',5),(43,'/assets/products/LinkStance.jpg',5),(44,'/assets/products/NarukamiYuCard.jpg',7),(45,'/assets/products/NarukamiYuMain.jpg',7),(46,'/assets/products/NarukamiYuPreview.jpg',7),(47,'/assets/products/NarukamiYuStance.jpg',7),(48,'/assets/products/TifaBack.jpg',3),(49,'/assets/products/TifaMain.jpg',3),(50,'/assets/products/TifaStance.jpg',3),(51,'/assets/products/TifaStance2.jpg',3);
+INSERT INTO `images` VALUES (1,'/assets/products/AbsoluteVisionVol1.jpg',15),(2,'/assets/products/AbsoluteVisionVol1.jpg',16),(3,'/assets/products/AgentOfTheEmpireVol1.jpg',22),(4,'/assets/products/AgentOfTheEmpireVol2.jpg',23),(5,'/assets/products/AgeOfApocalypseVol1.jpg',18),(6,'/assets/products/AgeOfApocalypseVol2.jpg',19),(7,'/assets/products/AgeOfUltron.jpg',17),(8,'/assets/products/ALongTimeAgoVol2.jpg',24),(9,'/assets/products/AbsoluteBlackestNight.jpg',12),(10,'/assets/products/AbsoluteGreenLanternRebirth.jpg',13),(11,'/assets/products/AssignmentEarth.jpg',20),(12,'/assets/products/Batman-CourtOfOwls.jpg',10),(13,'/assets/products/BatmanAndRobinTheBoyWonder.jpg',11),(14,'/assets/products/BlackestNightTheCorps.jpg',14),(15,'/assets/products/CloudBack.jpg',2),(16,'/assets/products/CloudMain.jpg',2),(17,'/assets/products/CloudOmnislash.jpg',2),(18,'/assets/products/CloudStance.jpg',2),(19,'/assets/products/DarthVaderGrip.jpg',8),(20,'/assets/products/DarthVaderMain.jpg',8),(21,'/assets/products/DarthVaderSide.jpg',8),(22,'/assets/products/DarthVaderSlash.jpg',8),(23,'/assets/products/DS9FoolsGold.jpg',21),(24,'/assets/products/HarleyVairantBack.jpg',1),(25,'/assets/products/HarleyVairantMain.jpg',1),(26,'/assets/products/HarleyVairantStance.jpg',1),(27,'/assets/products/HarleyVairantWalk.jpg',1),(28,'/assets/products/IronManBack.jpg',6),(29,'/assets/products/IronManMain.jpg',6),(30,'/assets/products/IronManShot.jpg',6),(31,'/assets/products/IronManStance.jpg',6),(32,'/assets/products/LaraGeared.jpg',9),(33,'/assets/products/LaraMain.jpg',9),(34,'/assets/products/LaraSide.jpg',9),(35,'/assets/products/LaraStance.jpg',9),(36,'/assets/products/LightningBack.jpg',4),(37,'/assets/products/LightningMain.jpg',4),(38,'/assets/products/LightningStance.jpg',4),(39,'/assets/products/LightningStance2.jpg',4),(40,'/assets/products/LinkBack.jpg',5),(41,'/assets/products/LinkMain.jpg',5),(42,'/assets/products/LinkPreview.jpg',5),(43,'/assets/products/LinkStance.jpg',5),(44,'/assets/products/NarukamiYuCard.jpg',7),(45,'/assets/products/NarukamiYuMain.jpg',7),(46,'/assets/products/NarukamiYuPreview.jpg',7),(47,'/assets/products/NarukamiYuStance.jpg',7),(48,'/assets/products/TifaBack.jpg',3),(49,'/assets/products/TifaMain.jpg',3),(50,'/assets/products/TifaStance.jpg',3),(51,'/assets/products/TifaStance2.jpg',3);
 /*!40000 ALTER TABLE `images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,6 +188,8 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(255) DEFAULT NULL,
+  `subtotal` float(6,2) DEFAULT NULL,
+  `shipping_fee` float(3,2) DEFAULT NULL,
   `total` float(6,2) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -206,7 +209,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'shipped',269.96,'2015-05-04 15:25:51','2015-05-04 15:25:51',1,2),(2,'shipped',369.92,'2015-05-04 15:50:43','2015-05-04 15:50:43',3,3),(3,'shipped',124.99,'2015-05-04 15:50:43','2015-05-04 15:50:43',1,1),(4,'order_in_process',164.97,'2015-05-04 16:13:53','2015-05-04 16:13:53',4,4);
+INSERT INTO `orders` VALUES (1,'shipped',269.96,5.00,274.96,'2015-05-04 15:25:51','2015-05-04 15:25:51',1,2),(2,'',369.92,5.00,374.92,'2015-05-04 15:50:43','2015-05-04 15:50:43',3,3),(3,'shipped',124.99,5.00,129.99,'2015-05-04 15:50:43','2015-05-04 15:50:43',1,1),(4,'order_in_process',164.97,5.00,169.97,'2015-05-04 16:13:53','2015-05-04 16:13:53',4,4);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,4 +312,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-05  9:13:25
+-- Dump completed on 2015-05-06  8:50:15
