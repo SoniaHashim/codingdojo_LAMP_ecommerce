@@ -2,9 +2,9 @@
 <head>
 	<title>Orders Dashboard</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-theme.min.css">
-	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
 	<style type="text/css">		
 		.inline {
 			display: inline-block;
@@ -37,6 +37,24 @@
 			}
 
 	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(document).on('change', '#update_status', function(){
+				$('#update_status').val();
+				var status = $('#update_status').val();
+				console.log($('#update_status').val());
+				// console.log(upd_status);
+				$('#status').val($(this).val());
+				console.log($('#status').val());
+				// $(this).parent().submit();
+					// $.post( '/orders/update', $(this).parent().serialize(), function(res) {
+					// 	console.log('updated!!!');
+					// });						
+				// });
+				// return false;
+			})
+		})
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -46,7 +64,7 @@
 		<ul class="nav nav-pills nav-justified">
 			<li class="active"><a href="#">Orders</a></li>
 			<li><a href="#">Products</a></li>
-			<li><a class="logoff" href="#">Log Off</a></li>
+			<li><a class="logoff" href="/admins/log_off">Log Off</a></li>
 		</ul>
 		</nav>
 		<div class="filter row-fluid">
@@ -63,7 +81,7 @@
 				<input type="submit" value="filter">
 			</form>
 		</div>
-		<div class="partials">
+		<div class="partials">			
 			<table class="table table-bordered table-striped">
 				<tr>
 					<th>Order ID</th>
@@ -73,76 +91,41 @@
 					<th>Total</th>
 					<th>Status</th>
 				</tr>
+
+				<?php
+				// var_dump($rows);
+				foreach ($rows as $data) {
+				?>
 				<tr>
-					<td><a href="#">100</a></td>
-					<td>Bob</td>
-					<td>9/6/2014</td>
-					<td>123 Dojo Way, Bellvue, WA 98005</td>
-					<td>$149.99</td>
+					<form action="/orders/show" method="post">
+						<td>
+							<input class="id" type="hidden" name="id" value="<?= $data['id'] ?>">
+							<a href="#"><?= $data['id'] ?></a>
+							<input type="submit" value="search order id">
+						</td>
+					</form>
+					<td><?= $data['first_name'] ?></td>
+					<td><?= $data['created_at'] ?></td>
+					<td><?= $data['address'] ?></td>
+					<td><?= $data['total'] ?></td>
 					<td>
-						<select>
-							<option value="shipped">Shipped</option>
-							<option value="order_in_process">Order in process</option>
-							<option value="cancelled">Cancelled</option>
-						</select>
-					</td>
-					<tr>
-					<td><a href="#">99</a></td>
-					<td>Joe</td>
-					<td>9/7/2014</td>
-					<td>123 Dojo Way, Bellvue, WA 98005</td>
-					<td>$99.99</td>
-					<td>
-						<select>
-							<option value="shipped">Shipped</option>
-							<option value="order_in_process">Order in process</option>
-							<option value="cancelled">Cancelled</option>
-						</select>
+						<form id="update" action="/orders/update" method="post">
+							<input id="status" type="hidden" name="status" value="">
+							<input class="id" type="hidden" name="id" value="<?= $data['id'] ?>">
+							<select id="update_status">
+								<option value="" disabled selected>Change order status
+								</option>
+								<option value="order_in_process">Order in process</option>
+								<option value="shipped">Shipped</option>
+								<option value="cancelled">Cancelled</option>
+							</select>
+						</form>
 					</td>
 				</tr>
-				<tr>
-					<td><a href="#">98</a></td>
-					<td>Brad</td>
-					<td>9/10/2014</td>
-					<td>123 Dojo Way, Bellvue, WA 98005</td>
-					<td>$299.99</td>
-					<td>
-						<select>
-							<option value="shipped">Shipped</option>
-							<option value="order_in_process">Order in process</option>
-							<option value="cancelled">Cancelled</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><a href="#">97</a></td>
-					<td>Tracy</td>
-					<td>9/20/2014</td>
-					<td>123 Dojo Way, Bellvue, WA 98005</td>
-					<td>$249.99</td>
-					<td>
-						<select>
-							<option value="shipped">Shipped</option>
-							<option value="order_in_process">Order in process</option>
-							<option value="cancelled">Cancelled</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><a href="#">90</a></td>
-					<td>Gandalf</td>
-					<td>10/2/2014</td>
-					<td>123 Hobbit Ave, Shire, Far Away 98005</td>
-					<td>$499.99</td>
-					<td>
-						<select>
-							<option value="shipped">Shipped</option>
-							<option value="order_in_process">Order in process</option>
-							<option value="cancelled">Cancelled</option>
-						</select>
-					</td>
-				</tr>
-			</table>
+				<?php
+				}
+				?>				
+			</table>			
 			<nav class="pages" >
 				<ul class="pagination">
 					<li><a aria-label="Previous" href="#"><span aria-hidden="true">&laquo</span></a></li>

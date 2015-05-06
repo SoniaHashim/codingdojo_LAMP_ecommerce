@@ -29,7 +29,7 @@
 <body>
 	<div class="container">
 		<h4>Admin Login Page</h4>
-		<form action="#" method="post">
+		<form action="/admins/login" method="post">
 			<p class="row">
 				<label>Email: </label>
 				<input id="email" type="text" name="email" placeholder="Enter email">
