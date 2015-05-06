@@ -109,16 +109,47 @@ class Products extends CI_Controller {
 		$category = '%'.$categories.'%';
 		//pagination
 		$page = $this->input->post('page_number');
+
+		// if (null == $this->session->userdata('page_num')) {
+		// 	echo 'reset session page_num<br>';
+		//  	$this->session->set_userdata('page_num',0);
+		// } 
+
 		if (empty($page)) $page = 0; 
 
+		// switch ($page) {
+		// 	case 'first':
+		// 		$page = 0; 
+		// 		break;
+		// 	case 'prev':	
+		// 		if (null !== $this->session->userdata('page_num')) {
+		// 			$page = $this->session->userdata('page_num') - 1;
+		// 			if ($page < 0) $page = 0; 
+		// 		} else { $page = 0; } 
+		// 		break; 
+		// 	case 'next':
+		// 		echo 'next';
+		// 		if (null !== $this->session->userdata('page_num')) {
+		// 			$page = $this->session->userdata('page_num') + 1;
+		// 			echo $this->session->userdata('page_num'); 
+		// 		} else { $page = 0; }
+		// 		break; 
+		// }
+		// echo 'Page...'.$page.'<br>';
+		// $this->session->set_userdata('page_num', $page);
+		// echo 'Session page_num: '.$this->session->userdata('page_num');
+
+		
 		$subset_details = array(
 			'search' => $search,
 			'category' => $category,
 			'page' => $page
 			);
+		// var_dump($subset_details);
 
 		$this->load->model('Product');
 		$records = $this->Product->filter_for_users($subset_details);
+		$this->load->view('users_partials/users_index_products', array('records' => $records));
 
 		// returns partial with filtered, paginated results 
 	}	
@@ -143,21 +174,20 @@ class Products extends CI_Controller {
 		// returns partial with filtered, paginated results for admin
 	}
 
-	public function show() {
+	public function show($id) {
 		$this->load->model('Product');
-		$record = $this->Product->get_product_by_id($this->input->post('product_id'));
-		$images = $this->Product->get_images_by_product_id($this->input->post('product_id'));
+
+		$record = $this->Product->get_product_by_id($id);
+		if (!$record) redirect('/');
+
+		$images = $this->Product->get_images_by_product_id($id);
+		$similar_products = $this->Product->get_similar_by_product_id($id);
+
+		$this->load->view('users_product_show', array('record' => $record, 'images' => $images, 'similar_products' => $similar_products));
 		// returns a partial containing more specific product info 
 	}
 
 	public function index() {
-		// Create a cart for a new session
-		if(!$this->session->userdata('cart_id')) {
-			$this->load->model('Cart');
-			$cart_id = $this->Cart->create();
-			$this->session->userdata('cart_id', $cart_id);
-		} 
-
 		$this->load->view('users_index');
 	}
 }

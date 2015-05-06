@@ -5,3 +5,5 @@ $route['404_override'] = '';
 
 //end of routes.php
 $route['admin'] = 'admins';
+$route['/products/show/(:num)'] = 'products/show/$1';
+$route['/products/index'] = "products";

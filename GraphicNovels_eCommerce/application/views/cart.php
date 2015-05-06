@@ -1,3 +1,8 @@
+<?php 
+var_dump($items); 
+var_dump($total); 
+?>
+
 <html>
 <head>
 	<title>Cart</title>
@@ -6,7 +11,30 @@
 	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap-theme.min.css">
 	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/css/cart.css">
-	<script type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(document).on('click', 'a.manipulate', function(){
+				event.preventDefault();
+				console.log('click to '+ $(this).attr('href') + ' product ' + $(this).attr('name'));
+				var form = '#'+$(this).attr('name');
+				console.log('using form '+ form + ' for ' + '/carts/'+$(this).attr('href'));
+				$(form).attr('action', '/carts/'+$(this).attr('href'));
+				$(form).submit();
+				return false;
+			});
+
+			$('form').submit(function(){
+				console.log('submit form');
+				console.log($(this).serialize());
+				var id = '#manipulate_' + $(this).attr('id');
+				$.post($(this).attr('action'), $(this).serialize(), function(res){
+					console.log(res);
+					$(id).html(res);
+				});
+				return false;
+			})
+		});
+	</script>
 </head>
 <body>
 	<div class='container'>
@@ -26,27 +54,32 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Product 1 Name</td>
-						<td>$19.99</td>
+					<?php foreach ($items as $item): ?>
+					<tr id=<?= "manipulate_".$item["products_id"] ?>>
+						<td><?= $item['name'] ?></td>
+						<td><?= $item['price'] ?></td>
 						<td>
 							<ul class='product-opt'>
-								<li>#</li>
-								<li><a href='#'>update</a></li>
-								<li><a class='false' href='#'><span class='glyphicon glyphicon-trash'></a></li>
+								<li><?= $item['quantity'] ?> </li>
+								<li><a class='manipulate' name=<?= $item["products_id"] ?> href='edit'>update</a></li>
+								<li><a class='false manipulate' name=<?= $item["products_id"] ?>  href='delete_from_cart'><span class='glyphicon glyphicon-trash'></a></li>
 							</ul>
-							<form action='cart/update' method='post'>
-								<input type='hidden' name='action' value='update'>
-								<input type='hidden' name='action' value='destroy'>
+							<form action='cart/update' method='post' id=<?= $item["products_id"]?>>
+								<input type='hidden' name='product_id' value= <?= $item["products_id"] ?>>
+								<input type='hidden' name='quantity' value= <?= $item["quantity"] ?>>
 							</form>
 						</td>
-						<td></td>
+						<td><?= $item['product_total'] ?></td>
 					</tr>
+					<?php endforeach ?>
 				</tbody>
 			</table>
 		</div>
 		<div class='col-md-12'>
-			<button class='col-md-2 btn btn-success col-md-push-7'>Continue Shopping</button>
+			<h4 class='col-md-2 col-md-push-7'>Grand Total: <?= $total?></h4>
+		</div>
+		<div class='col-md-12'>
+			<a href="/products"><button class='col-md-2 btn btn-success col-md-push-7'>Continue Shopping</button></a>
 		</div>
 		<div class='col-md-12'>
 			<h2>Shipping Information</h2>
