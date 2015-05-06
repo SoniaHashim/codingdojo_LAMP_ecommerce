@@ -23,7 +23,8 @@ var_dump($total);
 				return false;
 			});
 
-			$('form').submit(function(){
+			$(document).on('submit', 'form', function() { 
+				event.preventDefault(); 
 				console.log('submit form');
 				console.log($(this).serialize());
 				var id = '#manipulate_' + $(this).attr('id');
@@ -32,7 +33,7 @@ var_dump($total);
 					$(id).html(res);
 				});
 				return false;
-			})
+			});
 		});
 	</script>
 </head>

@@ -58,8 +58,13 @@ class Carts extends CI_Controller {
 		$quantity = $this->input->post('quantity');
 
 		$this->load->model('Cart');
-		if ($quantity <= 0) $this->Cart->remove_product($cart_id, $product_id);
-		else $this->Cart->update_product_quantity($cart_id, $product_id, $quantity);
+		if ($quantity <= 0) {
+			$this->Cart->remove_product($cart_id, $product_id);
+		} else {
+			$this->Cart->update_product_quantity($cart_id, $product_id, $quantity);
+			$item = $this->Cart->get_product_by_cart($cart_id, $product_id);
+			$this->load->view('users_partials/cart_update', array('item'=> $item));
+		}
 		// returns a partial containing updated information regarding quantity of product
 
 	}
