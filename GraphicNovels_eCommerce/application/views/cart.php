@@ -31,6 +31,9 @@ var_dump($total);
 				$.post($(this).attr('action'), $(this).serialize(), function(res){
 					console.log(res);
 					$(id).html(res);
+					$.get('/carts/show_total', function(res){
+						$('#cart_total').html(res);
+					});
 				});
 				return false;
 			});
@@ -41,7 +44,6 @@ var_dump($total);
 	<div class='container'>
 		<div class='row navigation main'>
 			<h3 class='col-md-10'>Dojo eCommerce</h3>
-			<a class='col-md-2'>Shopping Cart (#)</a>
 		<!-- END OF NAVIGATION -->
 		</div>
 		<div class='col-md-9'>
@@ -73,11 +75,9 @@ var_dump($total);
 						<td><?= $item['product_total'] ?></td>
 					</tr>
 					<?php endforeach ?>
+					<tr><td></td><td></td><td><h4>Grand Total:</h4></td><td><h4>$ <span id='cart_total'><?= $total?></span></h4></td></tr>
 				</tbody>
 			</table>
-		</div>
-		<div class='col-md-12'>
-			<h4 class='col-md-2 col-md-push-7'>Grand Total: <?= $total?></h4>
 		</div>
 		<div class='col-md-12'>
 			<a href="/products"><button class='col-md-2 btn btn-success col-md-push-7'>Continue Shopping</button></a>

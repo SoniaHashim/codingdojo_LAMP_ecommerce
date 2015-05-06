@@ -8,6 +8,18 @@ class Carts extends CI_Controller {
 		// $this->output->enable_profiler();
 	}
 
+	public function count() {
+		if ($this->session->userdata('cart_id')) {
+			$cart_id = $this->session->userdata('cart_id');
+			$this->load->model('Cart');
+			$record = $this->Cart->get_count_by_cart_id($cart_id);
+			if (empty($record)) echo '0';
+			else echo $record['count'];
+		} else {
+			echo '0'; 
+		}
+	}
+
 	public function show() {
 		$this->load->model('Cart');
 
@@ -19,8 +31,10 @@ class Carts extends CI_Controller {
 		} 
 
 		$items = $this->Cart->get_all($this->session->userdata('cart_id'));
+		if ($items[0]['id'] == null) $items = array();
 		$total = $this->Cart->get_total_by_id($this->session->userdata('cart_id'));
 
+		// $this->session->unset_userdata('cart_id');
 		$this->load->view('cart', array('items' => $items, 'total' => $total));
 		// returns a partial with product data
 	}
@@ -66,14 +80,12 @@ class Carts extends CI_Controller {
 			$this->load->view('users_partials/cart_update', array('item'=> $item));
 		}
 		// returns a partial containing updated information regarding quantity of product
-
 	}
 
 	public function show_total() {
 		$this->load->model('Cart');
-		$this->Cart->get_total_by_id($this->session->userdata('cart_id'));
-		// returns numeric result -> total in cart 
-
+		$total = $this->Cart->get_total_by_id($this->session->userdata('cart_id'));
+		echo $total;
 	}
 
 	public function show_total_for_product() {

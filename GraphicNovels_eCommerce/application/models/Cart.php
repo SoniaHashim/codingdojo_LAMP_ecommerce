@@ -80,6 +80,11 @@ class Cart extends CI_Model {
 		return $sum;
 	}
 
+	// returns the number of items in the cart
+	function get_count_by_cart_id($id) {
+		return $this->db->query("SELECT SUM(quantity) as count FROM carts_has_products WHERE carts_id = 1 GROUP BY carts_id")->row_array();
+	}
+
 	// returns all items in cart
 	function get_all($id) {
 		$query = "SELECT *, (products.price*carts_has_products.quantity) as product_total FROM carts LEFT JOIN carts_has_products ON carts_has_products.carts_id = carts.id LEFT JOIN products ON carts_has_products.products_id = products.id WHERE carts.id = ?";

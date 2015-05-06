@@ -45,14 +45,6 @@ class Product extends CI_Model {
 		$this->db->query($query, $values);
 	}
 
-	// function get_similar($category) {
-	// 	$category_id = $this->db->query("SELECT * FROM categories WHERE category = ?", array($category));
-	// 	$query = "SELECT * FROM products_has_categories LEFT JOIN products ON products.id = products_has_categories.id LEFT JOIN images ON products.image_id = images.id WHERE products_has_categories.category_id = ?";
-	// 	$values = array($category_id);
-
-	// 	return $this->db->query($query, $values)->record_array();
-	// }
-
 	function get_similar_by_product_id($product_id) {
 		$query = "SELECT * FROM products_has_categories WHERE product_id = ?";
 		$values = array($product_id);
@@ -66,14 +58,29 @@ class Product extends CI_Model {
 		return $results;
 	}
 
+	function filter_for_users_pagination($subset_details) {
+		$res_per_page = 5; 
+		$sort = $subset_details['sort'];
+		$search = $subset_details['search'];
+		$category = $subset_details['category'];
+
+		$query = "SELECT COUNT(*) as count FROM (SELECT products.id FROM products_has_categories LEFT JOIN products ON products.id = products_has_categories.product_id LEFT JOIN categories ON categories.id = products_has_categories.category_id LEFT JOIN images ON products.image_id = images.id WHERE name LIKE ? AND category LIKE ? GROUP BY products.id ORDER BY products.".$sort." ASC) AS products_list";
+		$values = array($search, $category); 
+		// var_dump($values);
+		$record = $this->db->query($query, $values)->row_array(); 
+		// var_dump($records); 
+		return $record['count']/$res_per_page; 
+	}
+
 	function filter_for_users($subset_details) {
 		// var_dump($subset_details);
 		$res_per_page = 5; 
 		$start_index = $res_per_page*$subset_details['page'];
+		$sort = $subset_details['sort'];
 		$search = $subset_details['search'];
 		$category = $subset_details['category'];
 
-		$query = "SELECT products.id as id, products.name as name, images.file_path as image, products.description as description, products.price as price FROM products_has_categories LEFT JOIN products ON products.id = products_has_categories.product_id LEFT JOIN categories ON categories.id = products_has_categories.category_id LEFT JOIN images ON products.image_id = images.id WHERE name LIKE ? AND category LIKE ? LIMIT ?, ?"; 
+		$query = "SELECT products.id as id, products.name as name, images.file_path as image, products.description as description, products.price as price, products.quantity_sold as quantity_sold FROM products_has_categories LEFT JOIN products ON products.id = products_has_categories.product_id LEFT JOIN categories ON categories.id = products_has_categories.category_id LEFT JOIN images ON products.image_id = images.id WHERE name LIKE ? AND category LIKE ? GROUP BY id ORDER BY ".$sort." ASC LIMIT ?, ?"; 
 		// echo $query;
 		$values = array($search, $category, $start_index, $res_per_page); 
 		// var_dump($values);
@@ -91,6 +98,10 @@ class Product extends CI_Model {
 		$values = array($search, $num, $num, $num, $start_index, $res_per_page); 
 
 		return $this->db->query($query, $values)->record_array(); 
+	}
+
+	function get_categories() {
+		return $this->db->query("SELECT category, COUNT(*) as count FROM categories LEFT JOIN products_has_categories ON categories.id = products_has_categories.category_id GROUP BY categories.id ORDER BY category ASC")->result_array();
 	}
 
 	function get_images_by_product_id($id) {

@@ -14,7 +14,7 @@ class Products extends CI_Controller {
 		// returns a partial allowing us to create a product
 	}
 
-	public function preview() {
+	public function previews() {
 		// NEED THIS POST DATA
 		// name
 		// description
@@ -89,7 +89,6 @@ class Products extends CI_Controller {
 		$this->load->library('upload', $config);
 		$this->upload->do_upload($image_name); 
 	}
-
 	
 
 	public function show_similar_products() {
@@ -100,6 +99,33 @@ class Products extends CI_Controller {
 		// returns partial with products within the same category
 	}
 
+	public function filter_for_users_pagination() {
+		$search_terms = $this->input->post('search');
+		$search = '%'.$search_terms.'%'; 
+		// search to match categories 
+		$categories = $this->input->post('category');
+		$category = '%'.$categories.'%';
+		//sort
+		$sort = $this->input->post('sort');
+		if (empty($sort)) $sort = 'id';
+		//pagination
+		$page = $this->input->post('page_number');
+		if (empty($page)) $page = 0; 
+		
+		$subset_details = array(
+			'search' => $search,
+			'category' => $category,
+			'sort' => $sort,
+			'page' => $page
+			);
+		// var_dump($subset_details);
+
+		$this->load->model('Product');
+		$count = $this->Product->filter_for_users_pagination($subset_details);
+		// var_dump($records);
+		$this->load->view('users_partials/users_index_pagination', array('count' => $count));
+	}
+
 	public function filter_for_users() {
 		// search terms to match Name
 		$search_terms = $this->input->post('search');
@@ -107,48 +133,27 @@ class Products extends CI_Controller {
 		// search to match categories 
 		$categories = $this->input->post('category');
 		$category = '%'.$categories.'%';
+		//sort
+		$sort = $this->input->post('sort');
+		if (empty($sort)) $sort = 'id';
 		//pagination
 		$page = $this->input->post('page_number');
-
-		// if (null == $this->session->userdata('page_num')) {
-		// 	echo 'reset session page_num<br>';
-		//  	$this->session->set_userdata('page_num',0);
-		// } 
-
 		if (empty($page)) $page = 0; 
-
-		// switch ($page) {
-		// 	case 'first':
-		// 		$page = 0; 
-		// 		break;
-		// 	case 'prev':	
-		// 		if (null !== $this->session->userdata('page_num')) {
-		// 			$page = $this->session->userdata('page_num') - 1;
-		// 			if ($page < 0) $page = 0; 
-		// 		} else { $page = 0; } 
-		// 		break; 
-		// 	case 'next':
-		// 		echo 'next';
-		// 		if (null !== $this->session->userdata('page_num')) {
-		// 			$page = $this->session->userdata('page_num') + 1;
-		// 			echo $this->session->userdata('page_num'); 
-		// 		} else { $page = 0; }
-		// 		break; 
-		// }
-		// echo 'Page...'.$page.'<br>';
-		// $this->session->set_userdata('page_num', $page);
-		// echo 'Session page_num: '.$this->session->userdata('page_num');
-
 		
 		$subset_details = array(
 			'search' => $search,
 			'category' => $category,
+			'sort' => $sort,
 			'page' => $page
 			);
 		// var_dump($subset_details);
+		// Set session info for go back method
+		// $this->session->set_userdata('filter', $subset_details);
+		// var_dump($this->session->userdata('filter'));
 
 		$this->load->model('Product');
 		$records = $this->Product->filter_for_users($subset_details);
+		// var_dump($records);
 		$this->load->view('users_partials/users_index_products', array('records' => $records));
 
 		// returns partial with filtered, paginated results 
@@ -174,9 +179,16 @@ class Products extends CI_Controller {
 		// returns partial with filtered, paginated results for admin
 	}
 
+	public function show_categories() {
+		$this->load->model('Product');
+		$records = $this->Product->get_categories();
+
+		$this->load->view('users_partials/categories', array('records' => $records));
+	}
+
+
 	public function show($id) {
 		$this->load->model('Product');
-
 		$record = $this->Product->get_product_by_id($id);
 		if (!$record) redirect('/');
 
@@ -188,6 +200,7 @@ class Products extends CI_Controller {
 	}
 
 	public function index() {
+		// if ($this->session->userdata('filter')) $this->load->view('users_index', $this->session->userdata('filter'));
 		$this->load->view('users_index');
 	}
 }
