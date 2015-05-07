@@ -43,6 +43,10 @@
 					console.log($(this).attr('href'));
 				}
 				console.log("INPUT #category value: "+$('#category').val());
+				var current_page = $('#page_number').val();
+				current_page = 0;
+				$('#page_number').val(current_page);
+				$('.title_page').html(current_page+1);
 				$('#title_category').html($('#category').val());
 				$('form').submit();
 			});
