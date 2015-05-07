@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `jns_ecommercedb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `jns_ecommercedb`;
 -- MySQL dump 10.13  Distrib 5.6.19, for osx10.7 (i386)
 --
 -- Host: 127.0.0.1    Database: jns_ecommercedb
@@ -87,7 +85,7 @@ CREATE TABLE `carts` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +94,7 @@ CREATE TABLE `carts` (
 
 LOCK TABLES `carts` WRITE;
 /*!40000 ALTER TABLE `carts` DISABLE KEYS */;
-INSERT INTO `carts` VALUES (1,'2015-05-05 12:39:04','2015-05-05 12:39:04'),(2,'2015-05-05 12:39:04','2015-05-05 12:39:04'),(3,'2015-05-05 12:39:05','2015-05-05 12:39:05'),(4,'2015-05-05 12:41:10','2015-05-05 12:41:10'),(5,'2015-05-05 12:41:10','2015-05-05 12:41:10'),(6,'2015-05-05 12:41:11','2015-05-05 12:41:11'),(7,'2015-05-05 13:10:32','2015-05-05 13:10:32'),(8,'2015-05-05 13:10:32','2015-05-05 13:10:32'),(9,'2015-05-05 13:10:33','2015-05-05 13:10:33');
+INSERT INTO `carts` VALUES (1,'2015-05-05 12:39:04','2015-05-05 12:39:04'),(2,'2015-05-05 12:39:04','2015-05-05 12:39:04'),(3,'2015-05-05 12:39:05','2015-05-05 12:39:05'),(4,'2015-05-05 12:41:10','2015-05-05 12:41:10'),(5,'2015-05-05 12:41:10','2015-05-05 12:41:10'),(6,'2015-05-05 12:41:11','2015-05-05 12:41:11'),(7,'2015-05-05 13:10:32','2015-05-05 13:10:32'),(8,'2015-05-05 13:10:32','2015-05-05 13:10:32'),(9,'2015-05-05 13:10:33','2015-05-05 13:10:33'),(10,'2015-05-06 09:32:26','2015-05-06 09:32:26'),(11,'2015-05-06 09:32:27','2015-05-06 09:32:27'),(12,'2015-05-06 15:07:20','2015-05-06 15:07:20'),(13,'2015-05-06 15:07:21','2015-05-06 15:07:21');
 /*!40000 ALTER TABLE `carts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +198,7 @@ CREATE TABLE `orders` (
   KEY `fk_orders_addresses2_idx` (`ship_address_id`),
   CONSTRAINT `fk_orders_addresses1` FOREIGN KEY (`billing_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_addresses2` FOREIGN KEY (`ship_address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +207,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'shipped',269.96,5.00,274.96,'2015-05-04 15:25:51','2015-05-04 15:25:51',1,2),(2,'',369.92,5.00,374.92,'2015-05-04 15:50:43','2015-05-04 15:50:43',3,3),(3,'shipped',124.99,5.00,129.99,'2015-05-04 15:50:43','2015-05-04 15:50:43',1,1),(4,'order_in_process',164.97,5.00,169.97,'2015-05-04 16:13:53','2015-05-04 16:13:53',4,4);
+INSERT INTO `orders` VALUES (1,'order_in_process',269.96,5.00,274.96,'2015-05-04 15:25:51','2015-05-04 15:25:51',1,2),(2,'shipped',369.92,5.00,374.92,'2015-05-04 15:50:43','2015-05-04 15:50:43',3,3),(3,'order_in_process',124.99,5.00,129.99,'2015-05-04 15:50:43','2015-05-04 15:50:43',1,1),(4,'cancelled',164.97,5.00,169.97,'2015-05-04 16:13:53','2015-05-04 16:13:53',4,4),(5,'order_in_process',424.96,5.00,429.96,'2015-05-06 16:38:25','2015-05-06 16:38:25',5,5),(6,'cancelled',214.96,5.00,219.96,'2015-05-06 17:05:59','2015-05-06 17:05:59',3,3),(7,'order_in_process',129.94,5.00,134.94,'2015-05-06 17:05:59','2015-05-06 17:05:59',4,2),(8,'shipped',179.94,5.00,184.94,'2015-05-06 17:05:59','2015-05-06 17:05:59',1,3),(9,'order_in_process',889.93,5.00,894.93,'2015-05-06 17:05:59','2015-05-06 17:05:59',1,2),(10,'order_in_process',149.99,5.00,154.99,'2015-05-06 17:05:59','2015-05-06 17:05:59',3,3),(11,'order_in_process',219.97,5.00,224.97,'2015-05-06 17:05:59','2015-05-06 17:05:59',5,4),(12,'order_in_process',249.98,5.00,254.98,'2015-05-06 17:05:59','2015-05-06 17:05:59',4,5),(13,'order_in_process',249.98,5.00,254.98,'2015-05-06 17:05:59','2015-05-06 17:05:59',2,2),(14,'shipped',229.95,5.00,234.95,'2015-05-06 17:05:59','2015-05-06 17:05:59',1,4),(15,'order_in_process',249.98,5.00,254.98,'2015-05-06 17:05:59','2015-05-06 17:05:59',4,3),(16,'order_in_process',104.97,5.00,109.97,'2015-05-06 17:05:59','2015-05-06 17:05:59',2,2),(17,'order_in_process',199.98,5.00,204.98,'2015-05-06 17:05:59','2015-05-06 17:05:59',5,1),(18,'order_in_process',99.99,5.00,104.99,'2015-05-06 17:05:59','2015-05-06 17:05:59',1,5),(19,'order_in_process',99.99,5.00,104.99,'2015-05-06 17:05:59','2015-05-06 17:05:59',3,4),(20,'order_in_process',89.97,5.00,94.97,'2015-05-06 17:05:59','2015-05-06 17:05:59',3,3);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +228,7 @@ CREATE TABLE `orders_has_products` (
   KEY `fk_orders_has_products_orders1_idx` (`order_id`),
   CONSTRAINT `fk_orders_has_products_orders1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_has_products_products1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +237,7 @@ CREATE TABLE `orders_has_products` (
 
 LOCK TABLES `orders_has_products` WRITE;
 /*!40000 ALTER TABLE `orders_has_products` DISABLE KEYS */;
-INSERT INTO `orders_has_products` VALUES (1,1,1,1),(2,1,5,1),(3,1,10,2),(4,2,8,2),(5,2,22,3),(6,2,23,3),(7,3,8,1),(19,4,18,1),(20,4,19,1),(21,4,17,1);
+INSERT INTO `orders_has_products` VALUES (1,1,1,1),(2,1,5,1),(3,1,10,2),(4,2,8,2),(5,2,22,3),(6,2,23,3),(7,3,8,1),(19,4,18,1),(20,4,19,1),(21,4,17,1),(22,5,6,3),(23,5,8,1),(24,6,14,3),(25,6,8,1),(26,7,20,2),(27,7,21,2),(28,7,24,2),(29,8,12,2),(30,8,13,2),(31,8,14,2),(32,9,4,3),(33,9,9,2),(34,9,1,2),(35,10,4,1),(36,11,5,2),(37,11,20,1),(38,12,2,1),(39,12,3,1),(40,13,2,1),(41,13,2,1),(42,14,7,1),(43,14,15,2),(44,14,16,2),(45,15,8,2),(46,16,15,1),(47,16,16,1),(48,16,17,1),(49,17,6,1),(50,17,5,1),(51,18,9,1),(52,19,5,1),(53,20,18,1),(54,20,19,1),(55,20,20,1);
 /*!40000 ALTER TABLE `orders_has_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-06  8:50:15
+-- Dump completed on 2015-05-06 21:03:13
