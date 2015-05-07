@@ -59,7 +59,7 @@ class Product extends CI_Model {
 	}
 
 	function filter_for_users_pagination($subset_details) {
-		$res_per_page = 5; 
+		$res_per_page = 4; 
 		$sort = $subset_details['sort'];
 		$search = $subset_details['search'];
 		$category = $subset_details['category'];
@@ -74,7 +74,7 @@ class Product extends CI_Model {
 
 	function filter_for_users($subset_details) {
 		// var_dump($subset_details);
-		$res_per_page = 5; 
+		$res_per_page = 4; 
 		$start_index = $res_per_page*$subset_details['page'];
 		$sort = $subset_details['sort'];
 		$search = $subset_details['search'];

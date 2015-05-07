@@ -1,20 +1,49 @@
+/*
+COLORS
+dark red: #A82208
+green: #B7F63D
+light red: #F44625
+blue: #003EC1
+cornflowerblue: #5570A8
+
+Light yellow: F6E559;
+pink: F49DC6;
+cyan: 0692A8;
+light blue: 69B5C1;
+fuschia: A8004F;
+*/
+
 .container {
 	width: 85%;
 	margin: 0 auto;
 }
 
+a {
+	color: #003EC1;
+}
+
+a:hover {
+	color: #A82208;
+}
+
 img {
-	width: 125px;
-	height: 125px;
-	background-color: pink;
+	width: 400px;
+	height: 400px;
+	padding: 25px;
+	background-color: #333;
+}
+
+h3 {
+	color: #333;
 }
 
 div.navigation {
 	padding: .8rem;
 	min-height: 1.6rem;
-	background-color: #444;
 	color: #fff;
 	margin-bottom: 1.6rem;
+	margin-top:.8rem;
+	border-bottom: 4px solid silver;
 }
 
 .navigation a {
@@ -23,7 +52,8 @@ div.navigation {
 }
 
 div.main {
-	border: solid 2px #000;
+	/* make this a subtle color */
+	border: solid 2px #ddd;
 }
 
 div.usertools {
@@ -90,4 +120,8 @@ div.product{
 
 ul.footer{
 	margin-left: 25%;
+}
+
+#page_links {
+	width: 85%;
 }

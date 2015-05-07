@@ -127,7 +127,7 @@
 <body>
 	<div class='container'>
 		<div class='row navigation'>
-			<h3 class='col-md-10'>Dojo eCommerce</h3>
+			<h3 class='col-md-10'>フィグマ</h3>
 			<a href='/carts/show/' class='col-md-2'>Shopping Cart (<span id='cart_count'></span>)</a>
 		<!-- END OF NAVIGATION -->
 		</div>
