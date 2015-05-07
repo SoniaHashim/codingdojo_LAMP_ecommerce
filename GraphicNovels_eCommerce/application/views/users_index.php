@@ -112,7 +112,8 @@
 
 				var last_page =  $('#last_page').attr('href'); 
 				console.log("last: " + last_page);
-				if (!current_page || current_page == last_page) current_page = '-1'; 
+				if (!current_page) current_page = '0';
+				if (current_page == last_page) current_page = last_page-1; 
 				current_page++;
 
 				$('#page_number').val(current_page);
@@ -127,8 +128,11 @@
 <body>
 	<div class='container'>
 		<div class='row navigation'>
-			<h3 class='col-md-10'>フィグマ</h3>
-			<a href='/carts/show/' class='col-md-2'>Shopping Cart (<span id='cart_count'></span>)</a>
+			<div class="col-sm-1 decoration"></div>
+			<div class="col-sm-2 decoration"></div>
+			<div class="col-sm-1 decoration"></div>
+			<h3 class='col-sm-9'>Figma Dojo</h3>
+			<a href='/carts/show/' class='col-md-1'>Shopping Cart (<span id='cart_count'></span>)</a>
 		<!-- END OF NAVIGATION -->
 		</div>
 		<div class='row main-content'>
