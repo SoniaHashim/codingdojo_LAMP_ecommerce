@@ -1,60 +1,3 @@
-<html>
-<head>
-	<title>Products Dashboard</title>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../assets/bootstrap/css/bootstrap-theme.min.css">
-	<script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
-	<style type="text/css">		
-		.inline {
-			display: inline-block;
-			vertical-align: top;
-			margin-right: 2rem;
-		}
-		.pages {
-			width: 365px;
-			margin: 0 auto;
-		}
-		.topnav {
-			width: 100%;
-			margin: 5rem 0 1.5rem 0;
-		}	
-			.topnav * {
-				width: 130px;				
-				display: inline-block;
-				vertical-align: top;
-			}
-			.topnav a {
-				margin-top: 5px;
-			}
-			.topnav .logoff {
-				margin-left: 63rem;
-			}
-			.topnav h3 {
-				margin: 1rem 0 0 1rem;
-			}
-		.receipt {
-			width: 800px;
-			margin: 0 auto;
-		}
-			h5 {
-				margin-bottom: 1rem;
-			}
-			.status {
-				border: 1px solid black;
-				background-color: #44B449;
-				padding: .5rem;
-			}
-			.totals {
-				margin: 0;
-				border: 1px solid black;
-				padding: .5rem;
-				width: 150px;
-			}
-
-	</style></head>
-<body>
-	<div class="container">
 		<div class="receipt">
 			<div class="inline customer_details">
 				<?php
@@ -100,9 +43,6 @@
 						}	
 					 ?>
 				</table>
-				<?php 
-					// $products {
-				?>
 				<h5 class="inline status">Status: <?= $products[0]['status'] ?></h5>
 				<div class="inline totals">
 					<p>Sub total: <?= $products[0]['subtotal'] ?></p>
