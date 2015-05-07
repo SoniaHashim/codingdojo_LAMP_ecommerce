@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8"> 
 	<title>Users Index - Products Display</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
@@ -132,10 +133,10 @@
 <body>
 	<div class='container'>
 		<div class='row navigation'>
-			<div class="col-sm-1 decoration"></div>
-			<div class="col-sm-2 decoration"></div>
-			<div class="col-sm-1 decoration"></div>
-			<h3 class='col-sm-9'>Figma Dojo</h3>
+			<div class="col-sm-1 decoration_1"></div>
+			<div class="col-sm-2 decoration_2"></div>
+			<div class="col-sm-1 decoration_3"></div>
+			<h2 class='col-sm-9'><a href="/">フィグマ Dojo</a></h2>
 			<a href='/carts/show/' class='col-md-1'>Shopping Cart (<span id='cart_count'></span>)</a>
 		<!-- END OF NAVIGATION -->
 		</div>

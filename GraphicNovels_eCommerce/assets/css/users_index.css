@@ -33,9 +33,13 @@ img {
 	background-color: #333;
 }
 
-h3 {
+h2 {
 	color: #white;
+	font-family: "quicksand";
+	
 }
+
+
 
 div.navigation {
 	padding: .8rem;
@@ -44,11 +48,12 @@ div.navigation {
 	margin-bottom: 1.6rem;
 	margin-top:.8rem;
 	background-color: #0692A8;
-	border: 4px solid #F6E559;
+	border-bottom: 10px solid #F6E559;
+	border-top: 10px solid #B7F63D;
 }
 
 .navigation a {
-	text-decoration: underline;
+	
 	text-align: right;
 }
 
@@ -60,14 +65,28 @@ div.main {
 div.usertools {
 	padding: 1.6rem;
 	background-color: #0692A8;
-	border: 4px solid #F6E559;
+	border-left: 10px solid #F6E559;
+	border-right: 10px solid #B7F63D;
 }
 
-div.decoration {
+div.decoration_1 {
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
 	background-color: #F49DC6;
+}
+
+div.decoration_2 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #F6E559;;
+}
+div.decoration_3 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #B7F63D;
 }
 .usertools ul{
 	font-size: 1.6rem;

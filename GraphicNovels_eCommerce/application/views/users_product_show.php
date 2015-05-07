@@ -1,5 +1,6 @@
 <html>
 <head>
+	<meta charset="UTF-8"> 
 	<title>Users - Product Show</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
@@ -39,7 +40,7 @@
 <body>
 	<div class='container'>
 		<div class='row navigation main'>
-			<h3 class='col-md-10'>Dojo eCommerce</h3>
+			<h2 class='col-sm-9'><a href="/">フィグマ Dojo</a></h2>
 			<a class='col-md-2' href= "/carts/show">Shopping Cart (<span id='cart_count'>#</span>)</a>
 		<!-- END OF NAVIGATION -->
 		</div>
