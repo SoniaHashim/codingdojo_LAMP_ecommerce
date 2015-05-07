@@ -157,12 +157,7 @@ class Products extends CI_Controller {
 			'search' => $search,
 			'category' => $category,
 			'sort' => $sort,
-<<<<<<< HEAD
-=======
-			'category' => $category, 
->>>>>>> finished admin login, show_orders, and some functionality in orders_dash.
-=======
->>>>>>> pushing beta version of site to new branch
+			'category' => $category,
 			'page' => $page
 			);
 		// var_dump($subset_details);
@@ -233,38 +228,14 @@ class Products extends CI_Controller {
 
 		$this->load->view('users_partials/categories', array('records' => $records));
 	}
-
-<<<<<<< HEAD
-
-	public function show($id) {
-		$this->load->model('Product');
-		$record = $this->Product->get_product_by_id($id);
-		if (!$record) redirect('/');
-
-		$images = $this->Product->get_images_by_product_id($id);
-		$similar_products = $this->Product->get_similar_by_product_id($id);
-
-		$this->load->view('users_product_show', array('record' => $record, 'images' => $images, 'similar_products' => $similar_products));
-		// returns a partial containing more specific product info 
-	}	
-
-<<<<<<< HEAD
-	public function index() {
-		// if ($this->session->userdata('filter')) $this->load->view('users_index', $this->session->userdata('filter'));
-		$this->load->view('users_index');
-=======
-=======
->>>>>>> pushing beta version of site to new branch
 	public function admin_index() {
 		$this->load->view('admin_products_dash');
 	}
-
-<<<<<<< HEAD
 	public function admin_show_all() {		
 		$this->load->view('admin_partials/modal');
->>>>>>> admin login, admin orders dash, and admin show products are fully functional. 2 known minor bugs in admin orders dash
+
 	}
-=======
+
 	// public function admin_show_all() {		
 	// 	$this->load->model('Product');
 	// 	$res['data'] = $this->Product->show_all_products();
@@ -272,7 +243,7 @@ class Products extends CI_Controller {
 	// }
 
 
->>>>>>> pushing beta version of site to new branch
+
 }
 
 //end of main controller
