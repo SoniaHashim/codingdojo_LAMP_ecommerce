@@ -8,6 +8,16 @@ class Products extends CI_Controller {
 		// $this->output->enable_profiler();
 	}
 
+	public function index() {
+		// Create a cart for a new session
+		if(!$this->session->userdata('cart_id')) {
+			$this->load->model('Cart');
+			$cart_id = $this->Cart->create();
+			$this->session->userdata('cart_id', $cart_id);
+		} 
+		$this->load->view('users_index');
+	}
+
 	public function create() {
 		$this->load->model('Product');
 		$product_details = $this->Product->create(); 
@@ -76,6 +86,8 @@ class Products extends CI_Controller {
 	}
 
 	public function upload_image() {
+		echo "yay";
+		die();
 		// use form_open_multipart('products/upload_image') in php on view
 		// config form such that name of input with upload file path = image
 		$image_path = 'image';
@@ -88,6 +100,7 @@ class Products extends CI_Controller {
 
 		$this->load->library('upload', $config);
 		$this->upload->do_upload($image_name); 
+		$this->update();
 	}
 
 	
@@ -148,18 +161,16 @@ class Products extends CI_Controller {
 		$record = $this->Product->get_product_by_id($this->input->post('product_id'));
 		$images = $this->Product->get_images_by_product_id($this->input->post('product_id'));
 		// returns a partial containing more specific product info 
+	}	
+
+	public function admin_index() {
+		$this->load->view('admin_products_dash');
 	}
 
-	public function index() {
-		// Create a cart for a new session
-		if(!$this->session->userdata('cart_id')) {
-			$this->load->model('Cart');
-			$cart_id = $this->Cart->create();
-			$this->session->userdata('cart_id', $cart_id);
-		} 
-
-		$this->load->view('users_index');
+	public function admin_show_all() {		
+		$this->load->view('admin_partials/modal');
 	}
 }
 
 //end of main controller
+

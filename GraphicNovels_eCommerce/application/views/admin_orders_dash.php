@@ -35,24 +35,68 @@
 			.topnav h3 {
 				margin: 1rem 0 0 1rem;
 			}
-
+			#update {
+				width: 170px;
+				margin: 0;
+			}
+			#stat_display {
+				width: 200px;
+				height: 20px;
+				background-color: yellow;
+			}
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$(document).on('change', '#update_status', function(){
-				$('#update_status').val();
-				var status = $('#update_status').val();
-				console.log($('#update_status').val());
-				// console.log(upd_status);
-				$('#status').val($(this).val());
-				console.log($('#status').val());
-				// $(this).parent().submit();
-					// $.post( '/orders/update', $(this).parent().serialize(), function(res) {
-					// 	console.log('updated!!!');
-					// });						
-				// });
-				// return false;
+			$.get('/orders/get_page', function(res) {
+				$('#partials').html(res);
+			});		
+			$('#searchbox').keypress(function (e) {
+				if(e.keyCode == 13) {				
+					$.post( $(this).parent().attr('action'), $(this).parent().serialize(), function(res) {
+						console.log('searching...');
+						$('#partials').html(res);
+					});
+					return false;
+				}
+			})	
+			$(document).on('change', '#filter_status', function() {
+				console.log($(this).val());
+				$(this).prev().attr('value', $(this).val());
+				console.log($(this).prev().attr('value', $(this).val()).val());
+				$.post( $(this).parent().attr('action'), $(this).parent().serialize(), function(res) {
+					console.log('filtering coffee beans...');
+					// console.log(res);
+					$('#partials').html(res);
+				});
+				return false;
 			})
+			$('.num').click(function(){
+				$('#page').val(this.id)
+				$.post( $('#pagination').attr('action'), $('#pagination').serialize(), function(res) {
+					console.log('fetching page...');	
+					console.log(res);
+					$('#partials').html(res);		
+				})
+				return false;					
+			})
+			$(document).on('click', '.form_id', function() {
+				$.post( $(this).parent().attr('action'), $(this).parent().serialize(), function(res) {
+					console.log('fetching sesame seeds...');
+					$('#partials').html(res)		
+				})
+				return false;					
+				
+			})
+			$(document).on('change', '.update_status', function() {
+				console.log($(this).val());
+				$(this).prev().val($(this).val());
+				console.log($(this).prev().val($(this).val()).val());
+				$.post( $(this).parent().attr('action'), $(this).parent().serialize(), function() {
+					console.log('updated!');
+				})
+				return false;
+			})
+
 		})
 	</script>
 </head>
@@ -62,86 +106,50 @@
 		<h3>Dashboard</h3>
 		<!-- clicking "Orders" or "Products" will send a get request to display partials -->
 		<ul class="nav nav-pills nav-justified">
-			<li class="active"><a href="#">Orders</a></li>
-			<li><a href="#">Products</a></li>
+			<li class="active"><a href="/admins/login">Orders</a></li>
+			<li><a href="/products/admin_index">Products</a></li>
 			<li><a class="logoff" href="/admins/log_off">Log Off</a></li>
 		</ul>
 		</nav>
 		<div class="filter row-fluid">
-			<form class="inline" action="#" method="post">
-				<input type="text" name="search" placeholder="search">
-				<input type="submit" value="submit search">
+			<form id="search"class="inline" action="/orders/filter_by_search" method="post">
+				<input id="searchbox" type="text" name="search" placeholder="search">
 			</form>
-			<form class="select inline" name='order_status' action="#" method="post">
-				<select>
+			<form class="select inline" action="/orders/filter_by_status" method="post">
+				<input id="order_status" type="hidden" name="order_status" value="hello">
+				<select id="filter_status">
 					<option value="show_all">Show All</option>
 					<option value="order_in_process">Order in process</option>
 					<option value="shipped">Shipped</option>
 				</select>
-				<input type="submit" value="filter">
 			</form>
 		</div>
-		<div class="partials">			
-			<table class="table table-bordered table-striped">
-				<tr>
-					<th>Order ID</th>
-					<th>Name</th>
-					<th>Date</th>
-					<th>Billing Address</th>
-					<th>Total</th>
-					<th>Status</th>
-				</tr>
-
-				<?php
-				// var_dump($rows);
-				foreach ($rows as $data) {
-				?>
-				<tr>
-					<form action="/orders/show" method="post">
-						<td>
-							<input class="id" type="hidden" name="id" value="<?= $data['id'] ?>">
-							<a href="#"><?= $data['id'] ?></a>
-							<input type="submit" value="search order id">
-						</td>
-					</form>
-					<td><?= $data['first_name'] ?></td>
-					<td><?= $data['created_at'] ?></td>
-					<td><?= $data['address'] ?></td>
-					<td><?= $data['total'] ?></td>
-					<td>
-						<form id="update" action="/orders/update" method="post">
-							<input id="status" type="hidden" name="status" value="">
-							<input class="id" type="hidden" name="id" value="<?= $data['id'] ?>">
-							<select id="update_status">
-								<option value="" disabled selected>Change order status
-								</option>
-								<option value="order_in_process">Order in process</option>
-								<option value="shipped">Shipped</option>
-								<option value="cancelled">Cancelled</option>
-							</select>
-						</form>
-					</td>
-				</tr>
-				<?php
-				}
-				?>				
-			</table>			
+		<div id="partials">									
+		</div>
+		<form id="pagination" action="/orders/get_page">
 			<nav class="pages" >
+			<input id="page" type="hidden" name="page" value="1">
 				<ul class="pagination">
 					<li><a aria-label="Previous" href="#"><span aria-hidden="true">&laquo</span></a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
+					<li>
+						<a id="1" class='num' href="#">1</a>
+					</li>
+					<li>
+						<a id="2" class='num' href="#">2</a>
+					</li>
+					<li>
+						<a id="3" class='num' href="#">3</a>
+					</li>
+					<li>
+						<a id="4" class='num' href="#">4</a>
+					</li>
+					<li>
+						<a id="5" class='num' href="#">5</a>
+					</li>
 					<li><a aria-label="Next" href="#"><span aria-hidden="true">&raquo</span></a></li>
 				</ul>
 			</nav>
-		</div>
+		</form>		
 	</div>
 </body>
 </html>

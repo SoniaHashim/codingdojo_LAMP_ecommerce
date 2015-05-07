@@ -7,6 +7,12 @@ class Orders extends CI_Controller {
 		parent::__construct();
 	}
 
+	public function index() {
+		$this->load->model('Order');
+		// $res['data'] = $this->Order->get_all();
+		$this->load->view('admin_orders_dash');
+	}
+
 	public function create() {
 		// calculate total for appropriate cart, acquire products in cart, destroy cart
 		$this->load->model('Cart'); 
@@ -76,35 +82,55 @@ class Orders extends CI_Controller {
 		$record = $this->Order->get_order_by_id($this->input->post('id'));
 		$products = $this->Order->get_products_by_order_id($this->input->post('id'));
 		// should return a partial showing order information
-		$this->load->view('admin_show_order', array('record' => $record, 'products' => $products));
+		$this->load->view('/admin_partials/admin_show_order', array('record' => $record, 'products' => $products));
 	}
 
-	public function filter() {		
-		// search by match for in all order fields 
-		$search_terms = $this->input->post('search'); 
-		// includes status match - Show All / Order In / Process / Shipped
-		$status = $this->input->post('status');
-		$search = '%'.$search_terms.'%'; 
-		// includes
-		$page = $this->input->post('page_number');
-		if (empty($page)) $page = 0; 
-		
-		$subset_details = array(
-			'search' => $search,
-			'status' => $status,
-			'page' => $page
-		);
-
+	public function filter_by_search() {
 		$this->load->model('Order'); 
-		$this->Order->filter($subset_details);
+		$subset_details = array();
+		// search by match for in all order fields 
+		$subset_details['search'] = "%".$this->input->post('search')."%";
+		// includes
+		$subset_details['page'] = $this->input->post('page_number');
+		if (empty($subset_details['page'])) $subset_details['page']  = 0;
+		$res['data'] = $this->Order->filter_by_search($subset_details);
+		$this->load->view('admin_partials/orders_filter_status', $res);
 		// should return a partial with appropriate results 
 	}
 
+	public function filter_by_status() {
+		$this->load->model('Order');
+		if($this->input->post('order_status') == 'show_all') {
+			$this->show_all();
+		}
+		else {
+			$res['data'] = $this->Order->filter_by_status($this->input->post());
+			$this->load->view('admin_partials/orders_filter_status', $res);			
+		}
+	}
+
+	public function get_page() {
+		$this->load->model('Order');
+		$page = $this->input->post('page');
+		if(empty($page) || intval($page) == 1) {
+			$page = 0;
+			$res['data'] = $this->Order->get_page($page);
+			$this->load->view('admin_partials/orders_show_all', $res);
+		}
+		else {			
+			$page = intval($page)-1;
+			$res['data'] = $this->Order->get_page($page);
+			$this->load->view('admin_partials/orders_show_all', $res);
+		}
+	}
+
 	public function update() {
-		var_dump($this->input->post());
-		die();
+		// var_dump($this->input->post());
+		// die();		
+
 		$this->load->model('Order'); 
 		$this->Order->change_status_by_id($this->input->post('id'), $this->input->post('status')); 
+
 		// echo "yay";
 		// $this->show_all();
 		// Should return partial with updated status
@@ -113,10 +139,11 @@ class Orders extends CI_Controller {
 
 	public function show_all() {
 		$this->load->model('Order');
-		$records['rows'] = $this->Order->get_all();
-		$this->load->view('admin_orders_dash', $records);
+		$res['data'] = $this->Order->get_all();
+		$this->load->view('admin_partials/orders_show_all', $res);
 		// should return a partial containing all order data 
 	}
-}
 
+
+}
 //end of main controller
