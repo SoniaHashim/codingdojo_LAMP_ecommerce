@@ -5,12 +5,16 @@ class Admin extends CI_Model {
 		$query = "SELECT * FROM admins WHERE admins.email = ?"; 
 		$values = array($admin_details['email']); 
 		$record = $this->db->query($query,$values)->row_array();
+		// var_dump($admin_details);
 		if (!empty($record)) {
-			$encrypted_password = md5($admin_details['password'], $record['salt']);
+			// var_dump($record);
+			$encrypted_password = md5($admin_details['password'].''.$record['salt']);
+			// echo md5('squash'.''.$record['salt']).'<br>';
+			// echo $encrypted_password;
 			if ($record['password'] == $encrypted_password) {
 				return true; 
 			} else {
-				echo 'Invalid email.'; 
+				echo 'Invalid password.'; 
 				return false; 
 			}
 		} else {

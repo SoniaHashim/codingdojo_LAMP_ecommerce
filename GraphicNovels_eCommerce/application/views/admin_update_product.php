@@ -51,7 +51,7 @@
 	</script>
 </head>
 <body>
-	<h2>Add/Edit Product - ID 3</h2>
+	<h3>Add/Edit Product - ID 3</h3>
 	<div class="container">
 		<form action="#" method="post">
 			<p>
