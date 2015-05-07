@@ -155,12 +155,14 @@ class Products extends CI_Controller {
 		
 		$subset_details = array(
 			'search' => $search,
-<<<<<<< HEAD
 			'category' => $category,
 			'sort' => $sort,
+<<<<<<< HEAD
 =======
 			'category' => $category, 
 >>>>>>> finished admin login, show_orders, and some functionality in orders_dash.
+=======
+>>>>>>> pushing beta version of site to new branch
 			'page' => $page
 			);
 		// var_dump($subset_details);
@@ -176,24 +178,53 @@ class Products extends CI_Controller {
 		// returns partial with filtered, paginated results 
 	}	
 
-	public function filter_for_admin() {
-		// search terms to match Id/Name/Inventory Count/ Quantity Solid
-		$search_terms = $this->input->post('search'); 
-		$search = '%'.$search_terms.'%'; 
-		// pagination
-		$page = $this->input->post('page_number');
-		if (empty($page)) $page = 0; 
 
-		$subset_details = array(
-			'num' => $search_terms,
-			'search' => $search,
-			'page' => $page
-		);
 
+	public function show($id) {
 		$this->load->model('Product');
-		$records = $this->Product->filter_for_admins($subset_details);
+		$record = $this->Product->get_product_by_id($id);
+		if (!$record) redirect('/');
+
+		$images = $this->Product->get_images_by_product_id($id);
+		$similar_products = $this->Product->get_similar_by_product_id($id);
+
+		$this->load->view('users_product_show', array('record' => $record, 'images' => $images, 'similar_products' => $similar_products));
+		// returns a partial containing more specific product info 
+	}
+
+
+	public function filter_for_admin() {
+		$this->load->model('Product');
+		// search terms to match Id/Name/Inventory Count/ Quantity Solid
+		$page = $this->input->post('page');
+		$subset_details = array();
+		// $subset_details['num'] = $this->input->post('search'); 
+		$subset_details['search'] = '%'.$this->input->post('search').'%'; 
+		// pagination
+		if (empty($page) || intval($page) == 1) {
+			$page = 0; 			
+			$subset_details['page'] = $page;
+		}
+		else {
+			$page = intval($page)-1;			
+			$subset_details['page'] = $page;
+		}
+		$res['data'] = $this->Product->filter_for_admins($subset_details);
+
 
 		// returns partial with filtered, paginated results for admin
+		$this->load->view('admin_partials/all_products', $res);
+	}
+
+	public function admin_show_in_modal() {
+		$this->load->model('Product');
+		$res['modal'] = $this->Product->get_product_by_id($this->input->post('product_id'));
+		// var_dump($result);
+		$res['categories'] = $this->Product->get_all_categories();
+		// var_dump($res);
+		$this->load->view('/admin_partials/modals', $res);
+		// $this->load->view('admin_partials/all_products', array('modal' => $result));
+		// returns a partial containing more specific product info 
 	}
 
 	public function show_categories() {
@@ -203,6 +234,7 @@ class Products extends CI_Controller {
 		$this->load->view('users_partials/categories', array('records' => $records));
 	}
 
+<<<<<<< HEAD
 
 	public function show($id) {
 		$this->load->model('Product');
@@ -221,14 +253,26 @@ class Products extends CI_Controller {
 		// if ($this->session->userdata('filter')) $this->load->view('users_index', $this->session->userdata('filter'));
 		$this->load->view('users_index');
 =======
+=======
+>>>>>>> pushing beta version of site to new branch
 	public function admin_index() {
 		$this->load->view('admin_products_dash');
 	}
 
+<<<<<<< HEAD
 	public function admin_show_all() {		
 		$this->load->view('admin_partials/modal');
 >>>>>>> admin login, admin orders dash, and admin show products are fully functional. 2 known minor bugs in admin orders dash
 	}
+=======
+	// public function admin_show_all() {		
+	// 	$this->load->model('Product');
+	// 	$res['data'] = $this->Product->show_all_products();
+	// 	$this->load->view('admin_partials/all_products', $res);
+	// }
+
+
+>>>>>>> pushing beta version of site to new branch
 }
 
 //end of main controller

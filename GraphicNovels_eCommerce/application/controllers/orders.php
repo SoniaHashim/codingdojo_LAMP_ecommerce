@@ -113,15 +113,13 @@ class Orders extends CI_Controller {
 		$this->load->model('Order');
 		$page = $this->input->post('page');
 		if(empty($page) || intval($page) == 1) {
-			$page = 0;
-			$res['data'] = $this->Order->get_page($page);
-			$this->load->view('admin_partials/orders_show_all', $res);
+			$page = 0;		
 		}
 		else {			
 			$page = intval($page)-1;
-			$res['data'] = $this->Order->get_page($page);
-			$this->load->view('admin_partials/orders_show_all', $res);
 		}
+		$res['data'] = $this->Order->get_page($page);
+		$this->load->view('admin_partials/orders_show_all', $res);
 	}
 
 	public function update() {

@@ -1,3 +1,16 @@
+<<<<<<< HEAD:e@002dcommerce_db/5-7-15_ecommercedb.sql
+=======
+:e@002dcommerce_db/jns_ecommercedb.sql
+SELECT 
+products.id as id, products.name as name, images.file_path as image, products.description as description, products.price as price
+FROM products_has_categories 
+LEFT JOIN products ON products.id = products_has_categories.product_id 
+LEFT JOIN categories ON categories.id = products_has_categories.category_id 
+LEFT JOIN images ON products.image_id = images.id
+WHERE name LIKE '%%' AND  category LIKE '%Marvel%' 
+ORDER BY id ASC
+LIMIT 0, 5 
+>>>>>>> pushing beta version of site to new branch:e@002dcommerce_db/jns_ecommerce5-6-most-recent-update.sql
 -- MySQL dump 10.13  Distrib 5.6.19, for osx10.7 (i386)
 --
 -- Host: 127.0.0.1    Database: jns_ecommercedb
@@ -311,4 +324,9 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD:e@002dcommerce_db/5-7-15_ecommercedb.sql
 -- Dump completed on 2015-05-07 16:31:21
+=======
+-- Dump completed on 2015-05-06 21:03:13
+admin:e@002dcommerce_db/jns_ecommerce5-6-most-recent-update.sql
+>>>>>>> pushing beta version of site to new branch:e@002dcommerce_db/jns_ecommerce5-6-most-recent-update.sql

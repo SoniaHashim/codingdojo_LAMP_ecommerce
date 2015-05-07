@@ -139,21 +139,48 @@
 	</style>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$.get('/products/admin_show_all', function(res) {
+		$.get('/products/filter_for_admin', function(res) {
 			$('#partials').html(res);
-		});
 
-		// $(document).on('change', '#update_status', function(){
-		// 	console.log($(this).val());
-		// 	var value = $(this).val();
-		// 	$(this).prev().attr('value', $(this).val());
-		// 	console.log($(this).prev().attr('value', $(this).val()).val());
-		// 	$.post( '/orders/update', $(this).parent().serialize(), function(res) {
-		// 		console.log('updated!!!');
-		// 	});
-		// 	return false;
-		// })
-		console.log($('#1').val());
+		});
+		$('.num').click(function(){
+			$('#page').val(this.id)
+			$.post( $('#pagination').attr('action'), $('#pagination').serialize(), function(res) {
+				console.log('fetching page...');	
+				$('#partials').html(res);		
+			})
+			return false;					
+		})
+		$(document).on('click', '.update_product', function() {
+			console.log('hello');
+			// var hidden = $(this).prev().val();	
+			$.post($(this).parent().attr('action'), $(this).parent().serialize(), function(res) {
+				console.log('posting to products...');
+				console.log(res);
+				$('#here').html(res);
+			})		
+		})
+
+		$(document).on('click', '.destroy_product', function() {
+			console.log('hello');
+			// var hidden = $(this).prev().val();	
+			$.post($(this).parent().attr('action'), $(this).parent().serialize(), function(res) {
+				console.log('Terminator!!!');
+				console.log(res);
+				$('#partials').html(res);
+			})		
+		})
+
+		$('#searchbox').keypress(function (e) {
+			if(e.keyCode == 13) {				
+				$.post( $(this).parent().attr('action'), $(this).parent().serialize(), function(res) {
+					console.log('searching...');
+					$('#partials').html(res);
+				});
+				return false;
+			}
+		})
+		// $(document).on('keydown', )
 	})
 	</script>
 </head>
@@ -168,33 +195,41 @@
 			<li><a class="logoff" href="/admins/log_off">Log Off</a></li>
 		</ul>
 		</nav>		
+
+		<div id="products_partial" class="filter row-fluid">
+			<form class="inline" action="/products/filter_for_admin" method="post">
+				<input id="searchbox"type="text" name="search" placeholder="search">
+			</form>
+			<a href="#addModal" class="select inline" id="create_product"><h4>Add new product</h4></a>
+		</div>
+
 		<div id="partials">
 			
 		</div>
-		<form action="/orders/get_page">
-			<input id="page" type="hidden" name="page" value="1">
+		<form id="pagination" action="/products/filter_for_admin">
 			<nav class="pages" >
+			<input id="page" type="hidden" name="page" value="1">
 				<ul class="pagination">
 					<li><a aria-label="Previous" href="#"><span aria-hidden="true">&laquo</span></a></li>
 					<li>
-						<a id="1"  href="#">1</a>
+						<a id="1" class='num' href="#">1</a>
 					</li>
 					<li>
-						<a href="#">2</a>
+						<a id="2" class='num' href="#">2</a>
 					</li>
 					<li>
-						<a href="#">3</a>
+						<a id="3" class='num' href="#">3</a>
 					</li>
 					<li>
-						<a href="#">4</a>
+						<a id="4" class='num' href="#">4</a>
 					</li>
 					<li>
-						<a href="#">5</a>
+						<a id="5" class='num' href="#">5</a>
 					</li>
 					<li><a aria-label="Next" href="#"><span aria-hidden="true">&raquo</span></a></li>
 				</ul>
 			</nav>
-		</form>
+		</form>	
 	</div>
 </body>
 </html>

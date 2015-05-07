@@ -10,16 +10,18 @@ class Product extends CI_Model {
 
 	function destroy($product_id) {
 		// removes images associated with product from file system
-		$records = $this->db->query("SELECT * FROM images WHERE product_id = ?", array($product_id)); 
-		for ($i = 0; $i < count($records); $i++) {
-			unlink($records[$i]['image']);
-		}
+		// $records = $this->db->query("SELECT * FROM images WHERE product_id = ?", array($product_id)); 
+		// for ($i = 0; $i < count($records); $i++) {
+		// 	unlink($records[$i]['image']);
+		// }
 		// clears images in DB associated with product
-		$this->db->query("DELETE FROM images WHERE product_id = ?", array($product_id));
-		// clears product from products has categories
-		$this->db->query("DELETE FROM products_has_categories WHERE product_id = ?", array($product_id));
-		// removes product from database
-		$this->db->query("DELETE FROM products WHERE id = ?", array($product_id));
+		$this->db->query(
+			"DELETE FROM products WHERE id = ?
+			", array($product_id));
+		// // clears product from products has categories
+		// $this->db->query("DELETE FROM products_has_categories WHERE product_id = ?", array($product_id));
+		// // removes product from database
+		// $this->db->query("DELETE FROM products WHERE id = ?", array($product_id));
 	}
 
 	function destroy_images($images) {
@@ -91,17 +93,22 @@ class Product extends CI_Model {
 
 	function filter_for_admins($subset_details) {
 		$res_per_page = 5; 
-		$start_index = $res_per_page*$subset_details['page'];
+		$start_index = $res_per_page * intval($subset_details['page']);
 		$search = $subset_details['search'];
+		// $num = $subset_details['num'];
 
-		$query = "SELECT * FROM products WHERE (name LIKE ? OR id = ? OR inventory = ? OR quantity_sold = ?) LIMIT (?, ?)"; 
-		$values = array($search, $num, $num, $num, $start_index, $res_per_page); 
+		$query = "SELECT *, products.id as product_id FROM products LEFT JOIN images ON images.id = products.image_id WHERE name LIKE ? OR product_id = ? OR inventory_count = ? OR quantity_sold = ? LIMIT ?, ?"; 
+		$values = array($search, $search, $search, $search, $start_index, $res_per_page); 
 
-		return $this->db->query($query, $values)->record_array(); 
+		return $this->db->query($query, $values)->result_array(); 
 	}
 
 	function get_categories() {
 		return $this->db->query("SELECT category, COUNT(*) as count FROM categories LEFT JOIN products_has_categories ON categories.id = products_has_categories.category_id GROUP BY categories.id ORDER BY category ASC")->result_array();
+	}
+
+	function get_all_categories() {
+		return $this->db->query("SELECT * from categories")->result_array();
 	}
 
 	function get_images_by_product_id($id) {
@@ -111,6 +118,8 @@ class Product extends CI_Model {
 	function get_product_by_id($id) {
 		return $this->db->query("SELECT * FROM products LEFT JOIN images ON images.id = products.image_id WHERE products.id = ?", array($id))->row_array(); 
 	}
-}
 
-?>
+	// function show_all_products() {
+	// 	return $this->db->query("SELECT * FROM products LEFT JOIN images ON images.id = products.image_id")->result_array();
+	// }
+}
