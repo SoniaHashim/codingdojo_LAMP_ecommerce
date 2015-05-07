@@ -19,11 +19,11 @@ fuschia: A8004F;
 }
 
 a {
-	color: #003EC1;
+	color: white;
 }
 
 a:hover {
-	color: #A82208;
+	color:#F49DC6;
 }
 
 img {
@@ -33,9 +33,13 @@ img {
 	background-color: #333;
 }
 
-h3 {
-	color: #333;
+h2 {
+	color: #white;
+	font-family: "quicksand";
+	
 }
+
+
 
 div.navigation {
 	padding: .8rem;
@@ -43,28 +47,55 @@ div.navigation {
 	color: #fff;
 	margin-bottom: 1.6rem;
 	margin-top:.8rem;
-	border-bottom: 4px solid silver;
+	background-color: #0692A8;
+	border-bottom: 10px solid #F6E559;
+	border-top: 10px solid #B7F63D;
 }
 
 .navigation a {
-	text-decoration: underline;
+	
 	text-align: right;
 }
 
 div.main {
 	/* make this a subtle color */
-	border: solid 2px #ddd;
+	
 }
 
 div.usertools {
 	padding: 1.6rem;
+	background-color: #0692A8;
+	border-left: 10px solid #F6E559;
+	border-right: 10px solid #B7F63D;
 }
 
+div.decoration_1 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #F49DC6;
+}
+
+div.decoration_2 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #F6E559;;
+}
+div.decoration_3 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #B7F63D;
+}
 .usertools ul{
 	font-size: 1.6rem;
 	list-style-type: none;
 	padding-left: 1.6rem;
+
+
 }
+
 
 div.main-content {
 	padding-left: 1.6rem;

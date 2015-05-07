@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8"> 
 	<title>Users Index - Products Display</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/bootstrap/css/bootstrap.min.css">
@@ -43,6 +44,10 @@
 					console.log($(this).attr('href'));
 				}
 				console.log("INPUT #category value: "+$('#category').val());
+				var current_page = $('#page_number').val();
+				current_page = 0;
+				$('#page_number').val(current_page);
+				$('.title_page').html(current_page+1);
 				$('#title_category').html($('#category').val());
 				$('form').submit();
 			});
@@ -112,7 +117,8 @@
 
 				var last_page =  $('#last_page').attr('href'); 
 				console.log("last: " + last_page);
-				if (!current_page || current_page == last_page) current_page = '-1'; 
+				if (!current_page) current_page = '0';
+				if (current_page == last_page) current_page = last_page-1; 
 				current_page++;
 
 				$('#page_number').val(current_page);
@@ -127,8 +133,11 @@
 <body>
 	<div class='container'>
 		<div class='row navigation'>
-			<h3 class='col-md-10'>フィグマ</h3>
-			<a href='/carts/show/' class='col-md-2'>Shopping Cart (<span id='cart_count'></span>)</a>
+			<div class="col-sm-1 decoration_1"></div>
+			<div class="col-sm-2 decoration_2"></div>
+			<div class="col-sm-1 decoration_3"></div>
+			<h2 class='col-sm-9'><a href="/">フィグマ Dojo</a></h2>
+			<a href='/carts/show/' class='col-md-1'>Shopping Cart (<span id='cart_count'></span>)</a>
 		<!-- END OF NAVIGATION -->
 		</div>
 		<div class='row main-content'>

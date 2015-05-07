@@ -157,6 +157,7 @@ class Products extends CI_Controller {
 			'search' => $search,
 			'category' => $category,
 			'sort' => $sort,
+			'category' => $category,
 			'page' => $page
 			);
 		// var_dump($subset_details);
@@ -227,16 +228,11 @@ class Products extends CI_Controller {
 
 		$this->load->view('users_partials/categories', array('records' => $records));
 	}
-
 	public function admin_index() {
 		$this->load->view('admin_products_dash');
 	}
-
-	// public function admin_show_all() {		
-	// 	$this->load->model('Product');
-	// 	$res['data'] = $this->Product->show_all_products();
-	// 	$this->load->view('admin_partials/all_products', $res);
-	// }
+	public function admin_show_all() {		
+		$this->load->view('admin_partials/modal');
 
 
 }

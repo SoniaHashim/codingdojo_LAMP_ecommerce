@@ -1,8 +1,28 @@
 .container {
 	width: 85%;
 	margin: 0 auto;
+	font-family: "quicksand";
 }
 
+div.decoration_1 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #F49DC6;
+}
+
+div.decoration_2 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #F6E559;;
+}
+div.decoration_3 {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #B7F63D;
+}
 img.small {
 	width: 40px;
 	height: 40px;
@@ -24,14 +44,36 @@ img.large {
 div.navigation {
 	padding: .8rem;
 	min-height: 1.6rem;
-	background-color: #444;
 	color: #fff;
 	margin-bottom: 1.6rem;
+	margin-top:.8rem;
+	background-color: #0692A8;
+	border-bottom: 10px solid #F6E559;
+	border-top: 10px solid #B7F63D;
 }
 
+
+
+h2{
+	font-family: "quicksand";
+	color: white;
+	
+}
+
+a:link {
+    color: white;
+}
+
+a:hover {
+	color:#F49DC6;
+}
+
+
 .navigation a {
-	text-decoration: underline;
+	
 	text-align: right;
+	color: white;
+
 }
 
 div.main-content > div {
