@@ -14,8 +14,8 @@ class JvMain extends CI_Controller {
 		// $this->load->view('admin_orders_dash');
 		// $this->load->view('admin_products_dash');
 		// $this->load->view('admin_show_order');
-		// $this->load->view('admin_update_product');
-		$this->load->view('users_index');
+		$this->load->view('admin_update_product');
+		// $this->load->view('users_index');
 		// $this->load->view('users_product_show');
 		// $this->load->view('cart');
 	}

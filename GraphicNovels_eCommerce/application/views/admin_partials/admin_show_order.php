@@ -52,22 +52,9 @@
 				width: 150px;
 			}
 
-	</style>
-	<script type="text/javascript">
-
-	</script>
-</head>
+	</style></head>
 <body>
 	<div class="container">
-		<nav class="topnav navbar navbar-default">
-			<h3>Dashboard</h3>
-			<!-- clicking "Orders" or "Products" will send a get request to display partials -->
-			<ul class="nav nav-pills nav-justified">
-				<li><a href="/orders/show_all">Orders</a></li>
-				<li><a href="#">Products</a></li>
-				<li><a class="logoff" href="#">Log Off</a></li>
-			</ul>
-		</nav>
 		<div class="receipt">
 			<div class="inline customer_details">
 				<?php

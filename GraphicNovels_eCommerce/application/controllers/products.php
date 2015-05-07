@@ -8,6 +8,16 @@ class Products extends CI_Controller {
 		// $this->output->enable_profiler();
 	}
 
+	public function index() {
+		// Create a cart for a new session
+		if(!$this->session->userdata('cart_id')) {
+			$this->load->model('Cart');
+			$cart_id = $this->Cart->create();
+			$this->session->userdata('cart_id', $cart_id);
+		} 
+		$this->load->view('users_index');
+	}
+
 	public function create() {
 		$this->load->model('Product');
 		$product_details = $this->Product->create(); 
@@ -76,13 +86,11 @@ class Products extends CI_Controller {
 	}
 
 	public function upload_image() {
+		echo "yay";
+		die();
 		// use form_open_multipart('products/upload_image') in php on view
 		// config form such that name of input with upload file path = image
-<<<<<<< HEAD
-		$image_path = 'image'; 
-=======
 		$image_path = 'image';
->>>>>>> finished admin login, show_orders, and some functionality in orders_dash.
 		// add image to database 
 		$config['upload_path'] = './assets/products/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -92,6 +100,7 @@ class Products extends CI_Controller {
 
 		$this->load->library('upload', $config);
 		$this->upload->do_upload($image_name); 
+		$this->update();
 	}
 	
 
@@ -205,12 +214,22 @@ class Products extends CI_Controller {
 
 		$this->load->view('users_product_show', array('record' => $record, 'images' => $images, 'similar_products' => $similar_products));
 		// returns a partial containing more specific product info 
-	}
+	}	
 
+<<<<<<< HEAD
 	public function index() {
 		// if ($this->session->userdata('filter')) $this->load->view('users_index', $this->session->userdata('filter'));
 		$this->load->view('users_index');
+=======
+	public function admin_index() {
+		$this->load->view('admin_products_dash');
+	}
+
+	public function admin_show_all() {		
+		$this->load->view('admin_partials/modal');
+>>>>>>> admin login, admin orders dash, and admin show products are fully functional. 2 known minor bugs in admin orders dash
 	}
 }
 
 //end of main controller
+
