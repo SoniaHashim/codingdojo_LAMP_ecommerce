@@ -9,9 +9,10 @@
 		.inline {
 			display: inline-block;
 			vertical-align: top;
+			margin-right: 5rem;
 		}		
 		.select {
-			margin-left: 75rem;
+			margin-left: 70rem;
 		}
 		.pages {
 			width: 365px;
@@ -44,8 +45,24 @@
 				height: 20px;
 				background-color: yellow;
 			}
-
-			
+			.receipt {
+			width: 925px;
+			margin: 0 auto;
+			}
+				h5 {
+					margin-bottom: 1rem;
+				}
+				.status {
+					border: 1px solid black;
+					background-color: #44B449;
+					padding: .5rem;
+				}
+				.totals {
+					margin: 0;
+					border: 1px solid black;
+					padding: .5rem;
+					width: 150px;
+				}			
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -119,7 +136,7 @@
 			</form>
 			<form class="select inline" action="/orders/filter_by_status" method="post">
 				<input id="order_status" type="hidden" name="order_status" value="hello">
-				<select id="filter_status">
+				<select class="form-control" id="filter_status">
 					<option value="show_all">Show All</option>
 					<option value="order_in_process">Order in process</option>
 					<option value="shipped">Shipped</option>

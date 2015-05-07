@@ -20,7 +20,7 @@
 			height: 60px;
 		}	
 		.select {
-			margin-left: 72rem;
+			margin-left: 83rem;
 		}
 		.pages {
 			width: 365px;
