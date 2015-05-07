@@ -90,11 +90,7 @@ class Products extends CI_Controller {
 		die();
 		// use form_open_multipart('products/upload_image') in php on view
 		// config form such that name of input with upload file path = image
-<<<<<<< HEAD
-		$image_path = 'image'; 
-=======
 		$image_path = 'image';
->>>>>>> admin
 		// add image to database 
 		$config['upload_path'] = './assets/products/';
 		$config['allowed_types'] = 'gif|jpg|png';
@@ -159,12 +155,8 @@ class Products extends CI_Controller {
 		
 		$subset_details = array(
 			'search' => $search,
-<<<<<<< HEAD
 			'category' => $category,
 			'sort' => $sort,
-=======
-			'category' => $category, 
->>>>>>> admin
 			'page' => $page
 			);
 		// var_dump($subset_details);
@@ -180,32 +172,6 @@ class Products extends CI_Controller {
 		// returns partial with filtered, paginated results 
 	}	
 
-	public function filter_for_admin() {
-		// search terms to match Id/Name/Inventory Count/ Quantity Solid
-		$search_terms = $this->input->post('search'); 
-		$search = '%'.$search_terms.'%'; 
-		// pagination
-		$page = $this->input->post('page_number');
-		if (empty($page)) $page = 0; 
-
-		$subset_details = array(
-			'num' => $search_terms,
-			'search' => $search,
-			'page' => $page
-		);
-
-		$this->load->model('Product');
-		$records = $this->Product->filter_for_admins($subset_details);
-
-		// returns partial with filtered, paginated results for admin
-	}
-
-	public function show_categories() {
-		$this->load->model('Product');
-		$records = $this->Product->get_categories();
-
-		$this->load->view('users_partials/categories', array('records' => $records));
-	}
 
 
 	public function show($id) {
@@ -218,24 +184,62 @@ class Products extends CI_Controller {
 
 		$this->load->view('users_product_show', array('record' => $record, 'images' => $images, 'similar_products' => $similar_products));
 		// returns a partial containing more specific product info 
-	}	
-
-<<<<<<< HEAD
-	public function index() {
-		// if ($this->session->userdata('filter')) $this->load->view('users_index', $this->session->userdata('filter'));
-		$this->load->view('users_index');
 	}
-}
-=======
+
+
+	public function filter_for_admin() {
+		$this->load->model('Product');
+		// search terms to match Id/Name/Inventory Count/ Quantity Solid
+		$page = $this->input->post('page');
+		$subset_details = array();
+		// $subset_details['num'] = $this->input->post('search'); 
+		$subset_details['search'] = '%'.$this->input->post('search').'%'; 
+		// pagination
+		if (empty($page) || intval($page) == 1) {
+			$page = 0; 			
+			$subset_details['page'] = $page;
+		}
+		else {
+			$page = intval($page)-1;			
+			$subset_details['page'] = $page;
+		}
+		$res['data'] = $this->Product->filter_for_admins($subset_details);
+
+
+		// returns partial with filtered, paginated results for admin
+		$this->load->view('admin_partials/all_products', $res);
+	}
+
+	public function admin_show_in_modal() {
+		$this->load->model('Product');
+		$res['modal'] = $this->Product->get_product_by_id($this->input->post('product_id'));
+		// var_dump($result);
+		$res['categories'] = $this->Product->get_all_categories();
+		// var_dump($res);
+		$this->load->view('/admin_partials/modals', $res);
+		// $this->load->view('admin_partials/all_products', array('modal' => $result));
+		// returns a partial containing more specific product info 
+	}
+
+	public function show_categories() {
+		$this->load->model('Product');
+		$records = $this->Product->get_categories();
+
+		$this->load->view('users_partials/categories', array('records' => $records));
+	}
+
 	public function admin_index() {
 		$this->load->view('admin_products_dash');
 	}
 
-	public function admin_show_all() {		
-		$this->load->view('admin_partials/modal');
-	}
+	// public function admin_show_all() {		
+	// 	$this->load->model('Product');
+	// 	$res['data'] = $this->Product->show_all_products();
+	// 	$this->load->view('admin_partials/all_products', $res);
+	// }
+
+
 }
 
 //end of main controller
->>>>>>> admin
 

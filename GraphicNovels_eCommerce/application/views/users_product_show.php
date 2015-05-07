@@ -48,10 +48,10 @@
 			<h2><?= $record['name']?></h2>
 			<div class='row'>
 				<div class='col-md-3'>
-					<img id="main_image" class='large' src=<?= $record['file_path']?>>
+					<img id="main_image" class='large' src="<?= $record['file_path']?>">
 					<div class='product-images'>
 						<?php foreach ($images as $image): ?>
-							<img class='small' src=<?=	$image["file_path"] ?>>
+							<img class='small' src='<?=	$image["file_path"] ?>'>
 						<?php endforeach ?>
 					</div>
 				</div>
@@ -85,7 +85,7 @@
 				
 				<li>
 					<div class='product'>
-						<a class='product' href=<?='/products/show/'.$product['product_id']?>><img class='medium' src=<?= $product['file_path'] ?>></a>
+						<a class='product' href=<?='/products/show/'.$product['product_id']?>><img class='medium' src="<?= $product['file_path'] ?>"></a>
 						<p class='price'><?= $product['price'] ?></p>
 					</div>
 					<p class='product-name'><?= $product['name'] ?></p>

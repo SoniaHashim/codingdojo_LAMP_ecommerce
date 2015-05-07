@@ -1,4 +1,4 @@
-<<<<<<< HEAD:e@002dcommerce_db/jns_ecommercedb.sql
+:e@002dcommerce_db/jns_ecommercedb.sql
 SELECT 
 products.id as id, products.name as name, images.file_path as image, products.description as description, products.price as price
 FROM products_has_categories 
@@ -8,7 +8,6 @@ LEFT JOIN images ON products.image_id = images.id
 WHERE name LIKE '%%' AND  category LIKE '%Marvel%' 
 ORDER BY id ASC
 LIMIT 0, 5 
-=======
 -- MySQL dump 10.13  Distrib 5.6.19, for osx10.7 (i386)
 --
 -- Host: 127.0.0.1    Database: jns_ecommercedb
@@ -322,4 +321,4 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-05-06 21:03:13
->>>>>>> admin:e@002dcommerce_db/jns_ecommerce5-6-most-recent-update.sql
+admin:e@002dcommerce_db/jns_ecommerce5-6-most-recent-update.sql

@@ -44,6 +44,8 @@
 				height: 20px;
 				background-color: yellow;
 			}
+
+			
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -106,7 +108,7 @@
 		<h3>Dashboard</h3>
 		<!-- clicking "Orders" or "Products" will send a get request to display partials -->
 		<ul class="nav nav-pills nav-justified">
-			<li class="active"><a href="/admins/login">Orders</a></li>
+			<li class="active"><a href="/orders">Orders</a></li>
 			<li><a href="/products/admin_index">Products</a></li>
 			<li><a class="logoff" href="/admins/log_off">Log Off</a></li>
 		</ul>
