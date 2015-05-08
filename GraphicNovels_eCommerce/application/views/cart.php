@@ -1,7 +1,4 @@
-<?php 
-var_dump($items); 
-var_dump($total); 
-?>
+
 
 <html>
 <head>
@@ -43,10 +40,13 @@ var_dump($total);
 <body>
 	<div class='container'>
 		<div class='row navigation main'>
-			<h3 class='col-md-10'>Dojo eCommerce</h3>
+			<div class="col-sm-1 decoration_1"></div>
+			<div class="col-sm-2 decoration_2"></div>
+			<div class="col-sm-1 decoration_3"></div>
+			<h3 class='col-md-10'><a href="/">フィグマ Dojo</a></h3>
 		<!-- END OF NAVIGATION -->
 		</div>
-		<div class='col-md-9'>
+		<div class='col-md-8 col-md-offset-2'>
 			<table class='table table-striped' rules='cols'>
 				<thead>
 					<tr>
@@ -79,21 +79,23 @@ var_dump($total);
 				</tbody>
 			</table>
 		</div>
-		<div class='col-md-12'>
-			<a href="/products"><button class='col-md-2 btn btn-success col-md-push-7'>Continue Shopping</button></a>
-		</div>
-		<div class='col-md-12'>
-			<h2>Shipping Information</h2>
-				<form action='order/create' method='post'>
-					<input type='hidden' name='cart_id' value='1'>
-					<label>First Name: <input type='text' name='first_name'></label>
-					<label>Last Name: <input type='text' name='last_name'></label>
-					<label>Address: <input type='text' name='address'></label>
-					<label>Address 2: <input type='text' name='address2'></label>
-					<label>City: <input type='text' name='city'></label>
-					<label>State: <input type='text' name='state'></label>
-					<label>Zipcode: <input type='text' name='zip'></label>
-			<h2>Billing Information</h2>
+		<!-- <div class='col-md-12'> -->
+			<a class = 'col-md-12' href="/products"><button class='continue col-md-2 btn btn-success col-md-push-8'>Continue Shopping</button></a>
+		<!-- </div> -->
+		<form action='order/create' method='post'>
+			<div class='col-md-4 col-md-offset-2'>
+				<h2>Shipping Information</h2>
+				<input type='hidden' name='cart_id' value='1'>
+				<label>First Name: <input type='text' name='first_name'></label>
+				<label>Last Name: <input type='text' name='last_name'></label>
+				<label>Address: <input type='text' name='address'></label>
+				<label>Address 2: <input type='text' name='address2'></label>
+				<label>City: <input type='text' name='city'></label>
+				<label>State: <input type='text' name='state'></label>
+				<label>Zipcode: <input type='text' name='zip'></label>
+			</div>
+			<div class='col-md-4'>
+				<h2>Billing Information</h2>
 				<label class='shipping'><input type='checkbox' name='same'> Use shipping </label>
 				<label>First Name: <input type='text' name='bill_first_name'></label>
 				<label>Last Name: <input type='text' name='bill_last_name'></label>
@@ -105,7 +107,9 @@ var_dump($total);
 				<label>Card: <input type='text' name='card'></label>
 				<label>Security Code: <input type='text' name='securitycode'></label>
 				<label>Expiration: <input type='date' name='expiration'></label>
-				<button class='btn btn-primary col-md-1 col-md-push-2' type='submit'>Pay</button>
+				<button class='continue btn btn-primary col-md-2 col-md-push-2' type='submit'>Pay</button>
+			</div>
+		</form>
 		</div>
 	<!-- END OF CONTAINER -->
 	</div>

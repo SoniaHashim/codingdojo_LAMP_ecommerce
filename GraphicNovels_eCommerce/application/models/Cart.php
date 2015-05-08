@@ -82,7 +82,7 @@ class Cart extends CI_Model {
 
 	// returns the number of items in the cart
 	function get_count_by_cart_id($id) {
-		return $this->db->query("SELECT SUM(quantity) as count FROM carts_has_products WHERE carts_id = 1 GROUP BY carts_id")->row_array();
+		return $this->db->query("SELECT SUM(quantity) as count FROM carts_has_products GROUP BY carts_id")->row_array();
 	}
 
 	// returns all items in cart

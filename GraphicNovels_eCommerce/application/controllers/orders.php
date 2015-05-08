@@ -88,9 +88,7 @@ class Orders extends CI_Controller {
 	public function filter_by_search() {
 		$this->load->model('Order'); 
 		$subset_details = array();
-		// search by match for in all order fields 
 		$subset_details['search'] = "%".$this->input->post('search')."%";
-		// includes
 		$subset_details['page'] = $this->input->post('page_number');
 		if (empty($subset_details['page'])) $subset_details['page']  = 0;
 		$res['data'] = $this->Order->filter_by_search($subset_details);

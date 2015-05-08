@@ -233,6 +233,7 @@ class Products extends CI_Controller {
 	}
 	public function admin_show_all() {		
 		$this->load->view('admin_partials/modal');
+	}
 
 
 }

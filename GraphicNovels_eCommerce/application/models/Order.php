@@ -47,7 +47,8 @@ class Order extends CI_Model {
 	}
 
 	function filter_by_status($beautiful) {
-		return $this->db->query("SELECT * FROM orders LEFT JOIN addresses ON addresses.id = orders.billing_address_id WHERE orders.status = ?", $beautiful)->result_array();
+
+		return $this->db->query("SELECT *, orders.id as order_id FROM orders LEFT JOIN addresses ON addresses.id = orders.billing_address_id WHERE orders.status = ?", $beautiful)->result_array();
 	}
 
 	function change_status_by_id($id, $status) {

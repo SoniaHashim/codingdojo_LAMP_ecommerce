@@ -25,10 +25,6 @@
 			<?php
 			}
 			 ?>
-			<!-- <li role="presentation"><a role="menuitem" href="#">Men's T-Shirt<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>
-			<li role="presentation"><a role="menuitem" href="#">Women's T-shirt<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>
-			<li role="presentation"><a role="menuitem" href="#">Shorts<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>
-			<li role="presentation"><a role="menuitem" href="#">Hat<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li> -->
 		</ul>
 	</div>
 	<p>

@@ -26,7 +26,7 @@
 				<form id="update" action="/orders/update" method="post">
 					<input class="id" type="hidden" name="id" value="<?= $info['id'] ?>">
 					<input class="inline" id="status" type="hidden" name="status">
-					<select class="update_status">
+					<select class="form-control" class="update_status">
 						<option value="<?= $info['status'] ?>" disabled selected><?= $info['status'] ?></option>
 						<option value="order_in_process">order in process</option>
 						<option value="shipped">shipped</option>

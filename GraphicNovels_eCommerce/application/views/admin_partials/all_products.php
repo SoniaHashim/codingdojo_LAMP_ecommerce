@@ -56,7 +56,7 @@
 	<tr>
 		<th>Picture</th>
 		<th>Product ID</th>
-		<th>Category Name</th>
+		<th>Product Name</th>
 		<th>Inventory Count</th>
 		<th>Quantity Sold</th>
 		<th>Action</th>
